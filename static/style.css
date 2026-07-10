@@ -1,1 +1,6 @@
-
+body { background: #0e0e0e; color: #fff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; padding-top: 20px; }
+.card { width: 90%; text-align: center; }
+.btn { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.pay { background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; }
+.support { background: #3498db; color: white; }
+.btn:active { transform: scale(0.95); }
