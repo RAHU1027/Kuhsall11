@@ -1,15 +1,21 @@
-<style>
-    .my-pay-btn {
-        background-color: #ff416c !important; /* Yahan apna manpasand color daalo */
-        color: white;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 10px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-</style>
-
-<button class="my-pay-btn" onclick="Telegram.WebApp.openLink('YOUR_PAYMENT_LINK_HERE')">
-    PAY NOW
-</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">{{ title }}</h2>
+        <div class="price-tag">Rs. {{ price }}</div>
+        
+        <button class="pay-button" onclick="window.location.href='https://t.me/KUSHAL206'">
+            🔑 PAY Rs. {{ price }} - UNLOCK NOW
+        </button>
+        
+        <p class="footer">✅ Instant Access After Payment</p>
+    </div>
+</body>
+</html>
