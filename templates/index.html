@@ -1,49 +1,25 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=999">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Force CSS overriding */
-        body {
-            background-color: #0e0e0e !important;
-            color: #ffffff !important;
-            font-family: sans-serif !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            height: 100vh !important;
-            margin: 0 !important;
+        body { background: #121212; font-family: sans-serif; padding: 20px; }
+        .btn {
+            display: block; width: 100%; padding: 15px; margin: 10px 0;
+            border-radius: 8px; border: none; color: white;
+            font-weight: bold; text-align: center; cursor: pointer;
         }
-        .pay-button {
-            width: 90% !important;
-            padding: 20px !important;
-            border: none !important;
-            border-radius: 15px !important;
-            font-size: 18px !important;
-            font-weight: bold !important;
-            cursor: pointer !important;
-            color: white !important;
-            /* Yahi wo gradient hai jo screenshot jaisa dikhega */
-            background: linear-gradient(90deg, #ff416c, #ff4b2b) !important;
-            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.5) !important;
-            text-transform: uppercase !important;
-        }
+        /* Screenshot jaisa colors */
+        .green { background: #4CAF50; }
+        .red { background: #d32f2f; }
+        .blue { background: #1976D2; }
     </style>
 </head>
 <body>
-    <div style="text-align: center; width: 100%;">
-        <h2 style="color: #ff4b2b;">{{ title }}</h2>
-        <h1 style="margin: 20px 0;">Rs. {{ price }}</h1>
-        
-        <button class="pay-button" onclick="window.location.href='https://t.me/KUSHAL206'">
-            🔑 PAY Rs. {{ price }} - UNLOCK NOW
-        </button>
-        
-        <p style="color: #888; margin-top: 20px; font-size: 12px;">✅ 100% Secure Payment</p>
-    </div>
+    <button class="btn green">🎥 FREE DEMO</button>
+    <button class="btn green">📢 PROOFS</button>
+    <button class="btn red">🔥 BUY PREMIUM ACCESS</button>
+    <button class="btn blue">🎁 REFER & EARN</button>
+    <button class="btn blue">👥 RATE US</button>
 </body>
 </html>
