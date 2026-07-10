@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="card">
-        <h2>🔥 {{ title }}</h2>
-        <p>Offers are live now!</p>
-        <button class="btn pay">🔑 PAY Rs. {{ price }} - UNLOCK</button>
-        <button class="btn support">💬 CONTACT ADMIN</button>
-    </div>
-</body>
-</html>
+<style>
+    .my-pay-btn {
+        background-color: #ff416c !important; /* Yahan apna manpasand color daalo */
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
+<button class="my-pay-btn" onclick="Telegram.WebApp.openLink('YOUR_PAYMENT_LINK_HERE')">
+    PAY NOW
+</button>
