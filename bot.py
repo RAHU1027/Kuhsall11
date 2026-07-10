@@ -8,11 +8,10 @@ from flask import Flask
 # --- CONFIG ---
 API_TOKEN = '5b108bd2fdd31c0c34bc65f24a5216a0'
 bot = telebot.TeleBot("8943344174:AAEnYcGFZCKyyZn0wcA_xuLw7mPCA4inRNw")
-ADMIN_ID = 7839672511
+ADMIN_ID = 7839672511  # <--- Yahan apni Telegram ID dalen
 PATH = "./" 
 file_id_cache = {} 
 USER_FILE = "users.txt"
-UPI_ID = "paytm.s20glin@pty" # Aapki UPI ID
 
 # --- SIDE MENU ---
 def set_menu():
@@ -105,14 +104,10 @@ Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>
 🔥 258 people bought this"""
 
 def get_keyboard(p):
-    # Sirf amount number nikalne ke liye logic
-    amt = p.replace('Rs.', '').replace('/-', '').strip()
-    upi_link = f"upi://pay?pa={UPI_ID}&pn=Merchant&am={amt}&cu=INR"
-    
     m = types.InlineKeyboardMarkup(row_width=1)
     m.add(
         types.InlineKeyboardButton("📽️ WATCH DEMO VIDEO", url="https://t.me/+JBVaDAvX-To1NzRl"),
-        types.InlineKeyboardButton(f"🔐 PAY Rs. {p} - UNLOCK NOW", url=upi_link),
+        types.InlineKeyboardButton(f"🔐 PAY Rs. {p} - UNLOCK NOW", callback_data=f"pay_{p}"),
         types.InlineKeyboardButton("💬 CONTACT ADMIN", url="t.me/KUSHAL206")
     )
     return m
@@ -143,13 +138,14 @@ def get_users(m):
 
 @bot.message_handler(commands=['start'])
 def start(m):
+    # Save User
     if not os.path.exists(USER_FILE): open(USER_FILE, "w").close()
     with open(USER_FILE, "r+") as f:
         if str(m.chat.id) not in f.read(): f.write(f"{m.chat.id}\n")
     
     uid = m.chat.id
     data = [
-        ("1.jpg", "999", T1), ("1.mp4", "499", T2),
+        ("1.jpg", "1,499", T1), ("1.mp4", "499", T2),
         ("2.jpg", "149", T3), ("2.mp4", "99", T4),
         ("3.jpg", "69", T5), ("3.mp4", "49", T6)
     ]
@@ -183,6 +179,7 @@ def approve(call):
     bot.edit_message_text("✅ Approved!", call.message.chat.id, call.message.message_id)
     bot.answer_callback_query(call.id)
 
+# --- STARTING ---
 if __name__ == "__main__":
     threading.Thread(target=run_web_server).start()
     set_menu()
