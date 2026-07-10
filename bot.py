@@ -107,8 +107,9 @@ def get_keyboard(p):
     m = types.InlineKeyboardMarkup(row_width=1)
     m.add(
         types.InlineKeyboardButton("📽️ WATCH DEMO VIDEO", url="https://t.me/+JBVaDAvX-To1NzRl"),
-        types.InlineKeyboardButton(f"🔐 PAY Rs. {p} - UNLOCK NOW", callback_data=f"pay_{p}"),
-        types.InlineKeyboardButton("💬 CONTACT ADMIN", url="t.me/KUSHAL206")
+        # Mini App wala button (yahan apna Render link daal dena)
+        types.InlineKeyboardButton(f"🔐 PAY Rs. {p} - UNLOCK NOW", web_app=types.WebAppInfo(url="https://your-render-app-link.onrender.com")),
+        types.InlineKeyboardButton("💬 CONTACT ADMIN", url="https://t.me/KUSHAL206")
     )
     return m
 
