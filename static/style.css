@@ -1,6 +1,47 @@
-body { background: #0e0e0e; color: #fff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; padding-top: 20px; }
-.card { width: 90%; text-align: center; }
-.btn { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.pay { background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; }
-.support { background: #3498db; color: white; }
-.btn:active { transform: scale(0.95); }
+body {
+    background-color: #121212;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    text-align: center;
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #333;
+}
+
+.title { color: #ff4b2b; margin-bottom: 10px; }
+
+.price-tag {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    /* Gradient Color Effect */
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+}
+
+.pay-button:active { transform: scale(0.95); }
+
+.footer { margin-top: 15px; font-size: 0.8rem; color: #888; }
