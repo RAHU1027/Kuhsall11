@@ -181,7 +181,14 @@ def approve(call):
 
 # --- STARTING ---
 if __name__ == "__main__":
-    threading.Thread(target=run_web_server).start()
+    threading.Thread(target=run_web_server, daemon=True).start()
     set_menu()
-    print("🚀 BOT LIVE!")
-    bot.infinity_polling()
+    print("🚀 BOT IS LIVE!")
+    
+    # Ye polling method zyada stable hai aur error aane par crash nahi hoga
+    while True:
+        try:
+            bot.infinity_polling(timeout=60, long_polling_timeout=60)
+        except Exception as e:
+            print(f"Polling Error: {e}")
+            time.sleep(5)  # 5 second ka wait karke wapis start hoga
