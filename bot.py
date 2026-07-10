@@ -108,7 +108,7 @@ def get_keyboard(p):
     m.add(
         types.InlineKeyboardButton("📽️ WATCH DEMO VIDEO", url="https://t.me/+JBVaDAvX-To1NzRl"),
         types.InlineKeyboardButton(f"🔐 PAY Rs. {p} - UNLOCK NOW", callback_data=f"pay_{p}"),
-        types.InlineKeyboardButton("💬 CONTACT ADMIN", url="t.me/JOD_HEREE_51")
+        types.InlineKeyboardButton("💬 CONTACT ADMIN", url="t.me/KUSHAL206")
     )
     return m
 
