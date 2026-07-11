@@ -3,34 +3,20 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; display: flex; background: #0b1622; color: white; font-family: sans-serif; }
-        /* Left Menu */
-        .sidebar { width: 200px; background: #182635; height: 100vh; padding: 20px; }
-        /* Main Content */
-        .content { flex: 1; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #1e3044; padding: 15px; border-radius: 10px; }
-        .card img { width: 100%; border-radius: 8px; }
-        .btn { background: #e50914; padding: 10px; width: 100%; border: none; color: white; cursor: pointer; border-radius: 5px; }
+        body { background: #0b1622; color: white; font-family: sans-serif; padding: 10px; margin: 0; }
+        .card { background: #182635; border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #2a3d51; }
+        .card img { width: 100%; border-radius: 10px; display: block; }
+        .content { font-size: 14px; white-space: pre-wrap; margin: 15px 0; color: #ccc; }
+        .btn { background: #e50914; color: white; padding: 12px; display: block; text-decoration: none; border-radius: 8px; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h3>My Wallet</h3>
-        <p>Paid: ₹{{ user.paid }}</p>
-        <p>Balance: ₹{{ user.balance }}</p>
+    {% for i in range(1, 7) %}
+    <div class="card">
+        <img src="{{ i }}.jpg" alt="Video">
+        <div class="content">{{ data[i-1] }}</div>
+        <a href="/pay/{{ i }}" class="btn">BUY NOW</a>
     </div>
-    
-    <div class="content">
-        <div class="grid">
-            {% for item in data %}
-            <div class="card">
-                <img src="{{ loop.index }}.jpg">
-                <p>{{ item }}</p>
-                <button class="btn">PURCHASE</button>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+    {% endfor %}
 </body>
 </html>
