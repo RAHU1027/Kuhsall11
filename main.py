@@ -1,35 +1,13 @@
+from flask import Flask, render_template_string
 import os
-from flask import Flask
 
-# --- CONFIG ---
-PATH = "./" 
-
-# --- WEB SERVICE FOR 24/7 ---
+# --- WEB SERVICE ---
 app = Flask(__name__)
 
-# Ye function aapka pura content browser mein display karega
-@app.route('/')
-def home():
-    # T1 se T6 tak ka content waisa hi hai jaisa aapka tha
-    html_content = f"""
-    <div style="font-family: sans-serif; line-height: 1.6; max-width: 600px; margin: auto;">
-        <pre>{T1}</pre><hr>
-        <pre>{T2}</pre><hr>
-        <pre>{T3}</pre><hr>
-        <pre>{T4}</pre><hr>
-        <pre>{T5}</pre><hr>
-        <pre>{T6}</pre>
-    </div>
-    """
-    return html_content
-
-@app.route('/ping')
-def ping(): return "Site is active", 200
-
-# --- EXACT VIDEO DATA (Aapka original text) ---
-T1 = """😍 80000+ zip file's Channel 💔
-━━━━━━━━━━━━━━━━━━━━
-Benefits:
+# --- EXACT VIDEO DATA (Aapka original data) ---
+T1 = """😍 <b>80000+ zip file's Channel</b> 💔
+<br>━━━━━━━━━━━━━━━━━━━━<br>
+<b>Benefits:</b>
 • 📁 All Dark Zip Files Available
 • 🆕 New Files Added Daily
 • 🔄 Forwarding Files is Allowed
@@ -37,13 +15,13 @@ Benefits:
 🤔 Want to Buy?
 🚀 Offers Are Live Now!
 
-Price: Rs. 3,999.00 Rs. 999.00
+Price: <strike>Rs. 3,999.00</strike> <b>Rs. 999.00</b>
 🔥 174 people bought this"""
 
-T2 = """📽️ AVAILABLE VIDEOS COLLECTION 🎁
-━━━━━━━━━━━━━━━━━━━━
-REAL PRICE - 2499/-
-OFFER PRICE - 499/- ✅
+T2 = """📽️ <b>AVAILABLE VIDEOS COLLECTION</b> 🎁
+<br>━━━━━━━━━━━━━━━━━━━━<br>
+REAL PRICE - <strike>2499/-</strike>
+OFFER PRICE - <b>499/-</b> ✅
 
 VALIDITY ~ 6 MONTH ⌛
 PREMIUM QUALITY STUFF ✨
@@ -54,13 +32,13 @@ PREMIUM QUALITY STUFF ✨
 
 🔥 77 people bought this"""
 
-T3 = """🥷 VIP STUFF AVAILABLE 🇨🇦
-━━━━━━━━━━━━━━━━━━━━
-Price: Rs. 299.00 Rs. 149.00
+T3 = """🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦
+<br>━━━━━━━━━━━━━━━━━━━━<br>
+Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b>
 🔥 94 people bought this"""
 
-T4 = """🎀 PREMIUM CUTIES LEAK 🎀
-━━━━━━━━━━━━━━━━━━━━
+T4 = """🎀 <b>PREMIUM CUTIES LEAK</b> 🎀
+<br>━━━━━━━━━━━━━━━━━━━━<br>
 🤡 HELLO USER
 Direct P#rn Video Channel 🫧
 D#si Maal Ke Deewan 🥀 Ke Liye ✨
@@ -70,16 +48,16 @@ Just pay and get entry... 💸
 Direct video - No Ads Sh#t 🚫
 Validity :- lifetime ✅
 
-Price: Rs. 249.00 Rs. 99.00
+Price: <strike>Rs. 249.00</strike> <b>Rs. 99.00</b>
 🔥 55 people bought this"""
 
-T5 = """🔞 PREMIUM DESI MAAL 🍑
-━━━━━━━━━━━━━━━━━━━━
-Price: Rs. 259.00 Rs. 69.00
+T5 = """🔞 <b>PREMIUM DESI MAAL</b> 🍑
+<br>━━━━━━━━━━━━━━━━━━━━<br>
+Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b>
 🔥 314 people bought this"""
 
-T6 = """🎬 PREMIUM ADULT COLLECTION UPDATED ✅
-━━━━━━━━━━━━━━━━━━━━
+T6 = """🎬 <b>PREMIUM ADULT COLLECTION UPDATED</b> ✅
+<br>━━━━━━━━━━━━━━━━━━━━<br>
 MAA-BETA 🖤
 BAAP-BETI 🖤
 BHAI-BEHEN 🖤
@@ -95,11 +73,27 @@ VALIDITY - 6 MONTH 🤝
 
 🔥🔥 100% MONEY BACK GUARANTEE IF NOT SATISFIED
 
-Price: Rs. 799.00 Rs. 49.00
+Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>
 🔥 258 people bought this"""
 
-# --- STARTING ---
+# --- WEBSITE DESIGN ---
+HTML = """
+<!DOCTYPE html>
+<html>
+<body style="background:#000; color:#fff; font-family:sans-serif; text-align:center;">
+    {% for t in data %}
+    <div style="border:1px solid #333; padding:20px; margin:20px auto; max-width:400px; border-radius:10px;">
+        <p>{{ t|safe }}</p>
+        <a href="https://t.me/KUSHAL206" style="background:#e50914; color:white; padding:10px; display:block; text-decoration:none; border-radius:5px;">CONTACT ADMIN</a>
+    </div>
+    {% endfor %}
+</body>
+</html>
+"""
+
+@app.route('/')
+def home():
+    return render_template_string(HTML, data=[T1, T2, T3, T4, T5, T6])
+
 if __name__ == "__main__":
-    # Website server start
-    print("🚀 WEBSITE IS LIVE!")
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
