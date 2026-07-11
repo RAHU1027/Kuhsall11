@@ -15,6 +15,39 @@ def keep_alive():
         time.sleep(300)
 threading.Thread(target=keep_alive, daemon=True).start()
 
+# --- DATA WITH IMAGES ---
+content = [
+    {
+        "title": "😍 80000+ zip file's Channel 💔",
+        "details": "Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!",
+        "price_old": "Rs. 3,999.00",
+        "price": "Rs. 999.00",
+        "sold": "174 people bought this",
+        "media": "/static/1.jpg"
+    },
+    {
+        "title": "📽️ AVAILABLE VIDEOS COLLECTION 🎁",
+        "details": "REAL PRICE - 2499/-<br>OFFER PRICE - 499/- ✅<br><br>VALIDITY ~ 6 MONTH ⌛<br>PREMIUM QUALITY STUFF ✨<br><br>• INCEST ( D@RK )<br>• SLEEPING PILLS<br>• ONLY INDIAN",
+        "price": "499/-",
+        "sold": "77 people bought this",
+        "media": "/static/2.jpg"
+    },
+    {
+        "title": "🥷 VIP STUFF AVAILABLE 🇨🇦",
+        "price_old": "Rs. 299.00",
+        "price": "Rs. 149.00",
+        "sold": "94 people bought this",
+        "media": "/static/3.jpg"
+    },
+    {
+        "title": "🔞 PREMIUM DESI MAAL 🍑",
+        "price_old": "Rs. 259.00",
+        "price": "Rs. 69.00",
+        "sold": "314 people bought this",
+        "media": "/static/2.jpg"
+    }
+]
+
 HTML = """
 <!DOCTYPE html>
 <html>
@@ -24,65 +57,37 @@ HTML = """
         body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:70px; }
         .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; border-bottom:2px solid #007bff; align-items:center; z-index:1000; }
         .nav-btn { cursor:pointer; font-weight:bold; color:#00d4ff; padding:5px 10px; border-radius:5px; background:rgba(0,123,255,0.1); }
-        .card { background:#15253d; padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid #2c3e50; line-height:1.6; }
+        .card { background:#15253d; padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid #2c3e50; }
         .btn-buy { background:#28a745; color:white; width:100%; padding:10px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; margin-top:10px; }
         .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center; }
         .box { background:#15253d; padding:20px; border-radius:15px; width:85%; border:1px solid #333; text-align:center; }
+        .menu { display:none; position:absolute; top:55px; left:10px; background:#1e2a38; border-radius:10px; padding:10px; border:1px solid #007bff; }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="nav-btn">⚙️ Menu</div>
+        <div style="position:relative;">
+            <div class="nav-btn" onclick="document.getElementById('settingsMenu').style.display='block'">⚙️ Settings</div>
+            <div id="settingsMenu" class="menu" onclick="this.style.display='none'">
+                <div style="padding:8px;">👤 My Profile</div>
+                <div style="padding:8px;">🎧 Support</div>
+            </div>
+        </div>
         <div class="nav-btn">💰 Wallet: ₹0</div>
     </div>
 
-    <!-- Product 1 -->
+    {% for i in content %}
     <div class="card">
-        <b>😍 80000+ zip file's Channel 💔</b><br>
-        ━━━━━━━━━━━━━━━━━━━━<br>
-        Benefits:<br>
-        • 📁 All Dark Zip Files Available<br>
-        • 🆕 New Files Added Daily<br>
-        • 🔄 Forwarding Files is Allowed<br><br>
-        🤔 Want to Buy?<br>
-        🚀 Offers Are Live Now!<br>
-        Price: <del>Rs. 3,999.00</del> <b>Rs. 999.00</b><br>
-        🔥 174 people bought this<br>
+        <img src="{{ i.media }}" style="width:100%; border-radius:10px; margin-bottom:10px;">
+        <b>{{ i.title }}</b>
+        <hr style="border:0; border-top:1px solid #444; margin:10px 0;">
+        {% if i.details %}<p>{{ i.details|safe }}</p>{% endif %}
+        {% if i.price_old %}<p>Price: <del>{{ i.price_old }}</del> <b>{{ i.price }}</b></p>
+        {% else %}<p>Price: <b>{{ i.price }}</b></p>{% endif %}
+        <p style="color:#ffc107; font-weight:bold;">🔥 {{ i.sold }}</p>
         <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
     </div>
-
-    <!-- Product 2 -->
-    <div class="card">
-        <b>📽️ AVAILABLE VIDEOS COLLECTION 🎁</b><br>
-        ━━━━━━━━━━━━━━━━━━━━<br>
-        REAL PRICE - 2499/-<br>
-        OFFER PRICE - 499/- ✅<br><br>
-        VALIDITY ~ 6 MONTH ⌛<br>
-        PREMIUM QUALITY STUFF ✨<br><br>
-        • INCEST ( D@RK )<br>
-        • SLEEPING PILLS<br>
-        • ONLY INDIAN<br><br>
-        🔥 77 people bought this<br>
-        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="card">
-        <b>🥷 VIP STUFF AVAILABLE 🇨🇦</b><br>
-        ━━━━━━━━━━━━━━━━━━━━<br>
-        Price: <del>Rs. 299.00</del> <b>Rs. 149.00</b><br>
-        🔥 94 people bought this<br>
-        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
-    </div>
-
-    <!-- Product 4 -->
-    <div class="card">
-        <b>🔞 PREMIUM DESI MAAL 🍑</b><br>
-        ━━━━━━━━━━━━━━━━━━━━<br>
-        Price: <del>Rs. 259.00</del> <b>Rs. 69.00</b><br>
-        🔥 314 people bought this<br>
-        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
-    </div>
+    {% endfor %}
 
     <div id="paymentPopup" class="popup">
         <div class="box" onclick="event.stopPropagation()">
@@ -115,7 +120,7 @@ HTML = """
 
 @app.route('/')
 def home():
-    return render_template_string(HTML)
+    return render_template_string(HTML, content=content)
 
 @app.route('/verify-payment', methods=['POST'])
 def verify():
