@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Collection</title>
     <style>
-        body { background: #121212; font-family: sans-serif; padding: 20px; }
-        .btn {
-            display: block; width: 100%; padding: 15px; margin: 10px 0;
-            border-radius: 8px; border: none; color: white;
-            font-weight: bold; text-align: center; cursor: pointer;
-        }
-        /* Screenshot jaisa colors */
-        .green { background: #4CAF50; }
-        .red { background: #d32f2f; }
-        .blue { background: #1976D2; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; padding: 20px; text-align: center; }
+        .box { border: 1px solid #444; padding: 20px; margin: 20px auto; max-width: 500px; border-radius: 15px; background: #111; }
+        .price { color: #00ff00; font-weight: bold; }
+        strike { color: #888; }
+        .buy-btn { display: block; background: #e50914; color: white; padding: 10px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
     </style>
 </head>
 <body>
-    <button class="btn green">🎥 FREE DEMO</button>
-    <button class="btn green">📢 PROOFS</button>
-    <button class="btn red">🔥 BUY PREMIUM ACCESS</button>
-    <button class="btn blue">🎁 REFER & EARN</button>
-    <button class="btn blue">👥 RATE US</button>
+
+    <h1>Premium Store</h1>
+
+    {% for text in data %}
+    <div class="box">
+        <pre style="white-space: pre-wrap; font-family: sans-serif;">{{ text }}</pre>
+        <a href="https://t.me/KUSHAL206" class="buy-btn">CONTACT ADMIN TO BUY</a>
+    </div>
+    {% endfor %}
+
 </body>
 </html>
