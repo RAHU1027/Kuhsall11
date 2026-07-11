@@ -12,11 +12,26 @@ def init_db():
 init_db()
 
 content = [
-    {"text": "😍 <b>80000+ zip file's Channel</b> 💔", "media": "/static/1.jpg", "price": "₹999"},
-    {"text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦", "media": "/static/3.jpg", "price": "₹149"},
-    {"text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀", "media": "/static/3.jpg", "price": "₹99"},
-    {"text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑", "media": "/static/2.jpg", "price": "₹69"},
-    {"text": "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅", "media": "/static/1.jpg", "price": "₹49"}
+    {
+        "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
+        "media": "/static/1.jpg", 
+        "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
+    },
+    {
+        "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media": "/static/3.jpg", 
+        "price": "Rs. 149.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
+    },
+    {
+        "text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct P#rn Video Channel 🫧<br>D#si Maal Ke Deewan 🥀 Ke Liye ✨<br>51000+ rare D#si le#ks ever.... 😍<br><br>Just pay and get entry... 💸<br>D#rect video - No Ads Sh#t 🚫<br>Validity :- lifetime ✅", 
+        "media": "/static/3.jpg", 
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 55 people bought this</span>"
+    },
+    {
+        "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media": "/static/2.jpg", 
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+    }
 ]
 
 HTML = """
@@ -54,7 +69,7 @@ HTML = """
     <div class="card">
         <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
         <p>{{ i.text|safe }}</p>
-        <p style="color:#ffc107; font-weight:bold;">Price: {{ i.price }}</p>
+        <p style="color:#ffc107; font-weight:bold;">Price: {{ i.price|safe }}</p>
         <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
         <button class="btn-buy" onclick="showPopup()">UNLOCK PREMIUM</button>
     </div>
