@@ -1,47 +1,115 @@
-* { box-sizing: border-box; }
-body { background: #0b1622; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; }
+/* Website ka main background white */
+body { 
+    background: #ffffff; 
+    color: #000000; 
+    font-family: sans-serif; 
+    margin: 0; 
+    padding-top: 70px; 
+}
+
+.header { 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    background: #ffffff; 
+    padding: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 1000; 
+    box-sizing: border-box; 
+    border-bottom: 2px solid #000000; 
+}
+
+.nav-btn { 
+    font-size: 11px; 
+    font-weight: bold; 
+    color: #000000; 
+    padding: 6px 10px; 
+    border-radius: 5px; 
+    background: #f0f0f0; 
+    border: 1px solid #000000; 
+    white-space: nowrap; 
+    cursor: pointer; 
+}
 
 .card { 
-    background: #182635; 
-    padding: 12px; 
-    margin: 0 auto 15px auto; 
-    width: 100%; 
-    max-width: 500px; 
-    border: 1px solid #2a3d51; 
-    border-radius: 12px; 
-    /* Yahan card ke andar elements set kiye hain */
+    background: #ffffff; 
+    padding: 15px; 
+    margin: 15px auto; 
+    width: 90%; 
+    border-radius: 15px; 
+    border: 1px solid #000000; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
 }
 
-.card img { 
+/* DEMO Button - Yellow Color */
+.btn-demo { 
+    background: #ffc107; 
+    color: #000000; 
     width: 100%; 
-    height: auto; 
-    border-radius: 8px; 
-    display: block; 
+    padding: 10px; 
     margin-bottom: 10px; 
-}
-
-.content { 
-    font-size: 14px; 
-    color: #ccc; 
-    margin-bottom: 12px; 
-    white-space: pre-wrap; 
-    text-align: left;
-}
-
-.btn { 
-    padding: 12px; 
-    display: block; 
-    text-decoration: none; 
-    border-radius: 8px; 
+    border: 2px solid #000000; 
+    border-radius: 5px; 
     font-weight: bold; 
-    text-align: center; 
-    color: white;
+    cursor: pointer; 
 }
 
-/* Button Colors */
-.btn-red { background: #e50914; }
-.btn-white { background: #ffffff; color: #000; }
-.btn-blue { background: #007bff; }
-.btn-green { background: #28a745; }
-.btn-purple { background: #6f42c1; }
-.btn-orange { background: #fd7e14; }
+/* UNLOCK Button - Red Color */
+.btn-buy { 
+    background: #ff0000; 
+    color: #ffffff; 
+    width: 100%; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.popup { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(255, 255, 255, 0.98); 
+    z-index: 9999; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.box { 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 15px; 
+    width: 85%; 
+    border: 2px solid #000000; 
+    text-align: center; 
+    position: relative; 
+}
+
+.back-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    color: #ff0000; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 11px; 
+}
+
+.menu { 
+    display: none; 
+    position: absolute; 
+    top: 45px; 
+    left: 10px; 
+    background: #ffffff; 
+    border-radius: 10px; 
+    padding: 10px; 
+    border: 1px solid #000000; 
+    width: 120px; 
+    z-index: 1001; 
+}
