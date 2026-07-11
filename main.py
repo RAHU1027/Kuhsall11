@@ -30,7 +30,14 @@ content = [
     {
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media": "/static/2.jpg", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        {
+        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>"
+                "━━━━━━━━━━━━━━━━━━━━<br>"
+                "🔥 ALL TYPE AVAILABLE<br>"
+                "✨ 90% OFF SALE<br>"
+                "💸 CLICK SHOP NOW 👇👇", 
+        "media": "/static/your_image_name.jpg", # Yahan apni image ka file path dalen
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
     }
 ]
 
