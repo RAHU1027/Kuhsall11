@@ -15,21 +15,6 @@ def keep_alive():
         time.sleep(300)
 threading.Thread(target=keep_alive, daemon=True).start()
 
-# --- ORIGINAL DATA ---
-T1 = "😍 <b>80000+ zip file's Channel</b> 💔"
-T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦"
-T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀"
-T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑"
-T6 = "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅"
-
-content = [
-    {"text": T1, "media": "/static/1.jpg", "price": "₹999"},
-    {"text": T3, "media": "/static/3.jpg", "price": "₹149"},
-    {"text": T4, "media": "/static/3.jpg", "price": "₹99"},
-    {"text": T5, "media": "/static/2.jpg", "price": "₹69"},
-    {"text": T6, "media": "/static/1.jpg", "price": "₹49"}
-]
-
 HTML = """
 <!DOCTYPE html>
 <html>
@@ -39,36 +24,65 @@ HTML = """
         body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:70px; }
         .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; border-bottom:2px solid #007bff; align-items:center; z-index:1000; }
         .nav-btn { cursor:pointer; font-weight:bold; color:#00d4ff; padding:5px 10px; border-radius:5px; background:rgba(0,123,255,0.1); }
-        .card { background:#15253d; padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid #2c3e50; }
-        .btn-demo { background:#ffc107; color:black; width:100%; padding:10px; border:none; border-radius:5px; font-weight:bold; margin-bottom:8px; cursor:pointer; }
-        .btn-buy { background:#28a745; color:white; width:100%; padding:10px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; }
+        .card { background:#15253d; padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid #2c3e50; line-height:1.6; }
+        .btn-buy { background:#28a745; color:white; width:100%; padding:10px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; margin-top:10px; }
         .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center; }
         .box { background:#15253d; padding:20px; border-radius:15px; width:85%; border:1px solid #333; text-align:center; }
-        .menu { display:none; position:absolute; top:55px; left:10px; background:#1e2a38; border-radius:10px; padding:10px; border:1px solid #007bff; }
     </style>
 </head>
 <body>
     <div class="header">
-        <div style="position:relative;">
-            <div class="nav-btn" onclick="document.getElementById('settingsMenu').style.display='block'">⚙️ Settings</div>
-            <div id="settingsMenu" class="menu" onclick="this.style.display='none'">
-                <div style="padding:8px;" onclick="alert('Profile Loading...')">👤 My Profile</div>
-                <div style="padding:8px;" onclick="alert('Support: @admin')">🎧 Support</div>
-                <div style="padding:8px;" onclick="alert('No New Notifications')">🔔 Notifications</div>
-            </div>
-        </div>
+        <div class="nav-btn">⚙️ Menu</div>
         <div class="nav-btn">💰 Wallet: ₹0</div>
     </div>
 
-    {% for i in content %}
+    <!-- Product 1 -->
     <div class="card">
-        <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
-        <p>{{ i.text|safe }}</p>
-        <p style="color:#ffc107; font-weight:bold;">Price: {{ i.price }}</p>
-        <button class="btn-demo" onclick="window.location.href='https://t.me/your_demo_link'">FREE DEMO</button>
+        <b>😍 80000+ zip file's Channel 💔</b><br>
+        ━━━━━━━━━━━━━━━━━━━━<br>
+        Benefits:<br>
+        • 📁 All Dark Zip Files Available<br>
+        • 🆕 New Files Added Daily<br>
+        • 🔄 Forwarding Files is Allowed<br><br>
+        🤔 Want to Buy?<br>
+        🚀 Offers Are Live Now!<br>
+        Price: <del>Rs. 3,999.00</del> <b>Rs. 999.00</b><br>
+        🔥 174 people bought this<br>
         <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
     </div>
-    {% endfor %}
+
+    <!-- Product 2 -->
+    <div class="card">
+        <b>📽️ AVAILABLE VIDEOS COLLECTION 🎁</b><br>
+        ━━━━━━━━━━━━━━━━━━━━<br>
+        REAL PRICE - 2499/-<br>
+        OFFER PRICE - 499/- ✅<br><br>
+        VALIDITY ~ 6 MONTH ⌛<br>
+        PREMIUM QUALITY STUFF ✨<br><br>
+        • INCEST ( D@RK )<br>
+        • SLEEPING PILLS<br>
+        • ONLY INDIAN<br><br>
+        🔥 77 people bought this<br>
+        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="card">
+        <b>🥷 VIP STUFF AVAILABLE 🇨🇦</b><br>
+        ━━━━━━━━━━━━━━━━━━━━<br>
+        Price: <del>Rs. 299.00</del> <b>Rs. 149.00</b><br>
+        🔥 94 people bought this<br>
+        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="card">
+        <b>🔞 PREMIUM DESI MAAL 🍑</b><br>
+        ━━━━━━━━━━━━━━━━━━━━<br>
+        Price: <del>Rs. 259.00</del> <b>Rs. 69.00</b><br>
+        🔥 314 people bought this<br>
+        <button class="btn-buy" onclick="showPayment()">BUY NOW</button>
+    </div>
 
     <div id="paymentPopup" class="popup">
         <div class="box" onclick="event.stopPropagation()">
@@ -78,7 +92,7 @@ HTML = """
             <form action="/verify-payment" method="POST">
                 <input name="username" placeholder="Telegram Username" required style="width:90%; margin:5px; padding:8px; border-radius:5px;">
                 <input name="tid" placeholder="Transaction ID" required style="width:90%; margin:5px; padding:8px; border-radius:5px;">
-                <button type="submit" class="btn-buy" style="margin-top:10px;">Submit Details</button>
+                <button type="submit" class="btn-buy">Submit Details</button>
             </form>
         </div>
     </div>
@@ -101,7 +115,7 @@ HTML = """
 
 @app.route('/')
 def home():
-    return render_template_string(HTML, content=content)
+    return render_template_string(HTML)
 
 @app.route('/verify-payment', methods=['POST'])
 def verify():
