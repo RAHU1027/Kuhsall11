@@ -2,13 +2,9 @@ from flask import Flask, render_template_string, request, session
 import os, threading, requests, time, sqlite3
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey' # Wallet session ke liye zaruri
+app.secret_key = 'super_secret_key'
 
-# --- CONFIGURATION ---
-BOT_TOKEN = "8991320152:AAFLJcXRpfQi3P-Wgap0bF8e5wIscG4XxY0"
-ADMIN_ID = "6632236983"
-
-# --- DATABASE SETUP FOR AUTOMATIC TID CHECK ---
+# --- DATABASE SETUP (Automatic TID check) ---
 def init_db():
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
@@ -26,20 +22,15 @@ def keep_alive():
 threading.Thread(target=keep_alive, daemon=True).start()
 
 # --- ORIGINAL DATA ---
-T1 = "😍 <b>80000+ zip file's Channel</b> 💔"
-T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦"
-T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀"
-T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑"
-T6 = "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅"
-
 content = [
-    {"text": T1, "media": "/static/1.jpg", "price": "₹999"},
-    {"text": T3, "media": "/static/3.jpg", "price": "₹149"},
-    {"text": T4, "media": "/static/3.jpg", "price": "₹99"},
-    {"text": T5, "media": "/static/2.jpg", "price": "₹69"},
-    {"text": T6, "media": "/static/1.jpg", "price": "₹49"}
+    {"text": "😍 <b>80000+ zip file's Channel</b> 💔", "media": "/static/1.jpg", "price": "₹999"},
+    {"text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦", "media": "/static/3.jpg", "price": "₹149"},
+    {"text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀", "media": "/static/3.jpg", "price": "₹99"},
+    {"text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑", "media": "/static/2.jpg", "price": "₹69"},
+    {"text": "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅", "media": "/static/1.jpg", "price": "₹49"}
 ]
 
+# --- ORIGINAL HTML ---
 HTML = """
 <!DOCTYPE html>
 <html>
@@ -90,7 +81,6 @@ HTML = """
             </form>
         </div>
     </div>
-
     <script>
         function showPayment() { document.getElementById('paymentPopup').style.display = 'flex'; }
     </script>
@@ -105,28 +95,23 @@ def home():
 
 @app.route('/verify-payment', methods=['POST'])
 def verify():
-    username = request.form.get('username')
     tid = request.form.get('tid').strip()
     
-    # Check Database for Duplicate TID
+    # Auto-Verification Logic: Check if TID is already in DB
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
     c.execute("SELECT * FROM transactions WHERE tid=?", (tid,))
     if c.fetchone():
         conn.close()
-        return "❌ This Transaction ID is already used!"
+        return "❌ This TID is already used!"
     
-    # Save TID
+    # Save TID and update session wallet
     c.execute("INSERT INTO transactions VALUES (?)", (tid,))
     conn.commit()
     conn.close()
     
-    # Update Wallet
-    session['wallet'] = session.get('wallet', 0) + 100 # Example addition
-    
-    msg = f"🔔 NEW PAYMENT\nUser: {username}\nTID: {tid}\nStatus: AUTO-RECORDED"
-    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", json={"chat_id": ADMIN_ID, "text": msg})
-    return "Details Submitted! Access will be granted shortly."
+    session['wallet'] = session.get('wallet', 0) + 999
+    return "✅ Payment Verified Successfully! Your wallet has been updated."
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
