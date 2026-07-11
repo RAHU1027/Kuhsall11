@@ -10,15 +10,23 @@ TELEGRAM_CHAT_ID = "6632236983"
 # YAHA APNA RENDER URL DALEIN (Jaise: https://myapp.onrender.com)
 DOMAIN = "https://aapka-domain.onrender.com" 
 
-# --- TUMHARA ORIGINAL CONTENT (Video hata diya) ---
-T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed"
-T2 = "🎁 <b>PREMIUM COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅"
-T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b>"
-
+# --- UPDATED CONTENT ---
 content = [
-    {"text": T1, "media": "/static/1.jpg", "price": "₹999"},
-    {"text": T2, "media": "/static/2.jpg", "price": "₹499"},
-    {"text": T3, "media": "/static/3.jpg", "price": "₹149"}
+    {
+        "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 <b>Want to Buy?</b><br>🚀 <i>Offers Are Live Now!</i><br><br>Price: <strike>Rs. 3,999.00</strike> <b>Rs. 99.00</b><br>🔥 <i>174 people bought this</i>",
+        "media": "/static/1.jpg",
+        "price": "₹99"
+    },
+    {
+        "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b><br>🔥 <i>94 people bought this</i>",
+        "media": "/static/2.jpg",
+        "price": "₹149"
+    },
+    {
+        "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b><br>🔥 <i>314 people bought this</i>",
+        "media": "/static/3.jpg",
+        "price": "₹69"
+    }
 ]
 
 HTML = """
@@ -48,7 +56,6 @@ HTML = """
     <div class="card">
         <img src="{{ i.media }}">
         <p style="margin-top:15px; font-size:15px;">{{ i.text|safe }}</p>
-        <p style="font-size:18px; color:#ffc107; font-weight:bold;">Price: {{ i.price }}</p>
         <div class="btn-demo" onclick="alert('Demo Loading...')">FREE DEMO</div>
         <div class="buy-btn" onclick="showPayment()">BUY NOW</div>
     </div>
