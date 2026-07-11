@@ -18,29 +18,32 @@ content = [
         "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
     {
+        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>"
+                "━━━━━━━━━━━━━━━━━━━━<br>"
+                "🔥 ALL TYPE AVAILABLE<br>"
+                "✨ 90% OFF SALE<br>"
+                "👇 CLICK SHOP NOW 👇", 
+        "media": "/static/mms_leak.jpg", 
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
+    },
+    {
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media": "/static/3.jpg", 
         "price": "Rs. 149.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
     },
     {
         "text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct P#rn Video Channel 🫧<br>D#si Maal Ke Deewan 🥀 Ke Liye ✨<br>51000+ rare D#si le#ks ever.... 😍<br><br>Just pay and get entry... 💸<br>D#rect video - No Ads Sh#t 🚫<br>Validity :- lifetime ✅", 
-        "media": "/static/3.jpg", 
+        "media": "/static/cuties.jpg", 
         "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 55 people bought this</span>"
     },
     {
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media": "/static/2.jpg", 
-        {
-        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>"
-                "━━━━━━━━━━━━━━━━━━━━<br>"
-                "🔥 ALL TYPE AVAILABLE<br>"
-                "✨ 90% OFF SALE<br>"
-                "💸 CLICK SHOP NOW 👇👇", 
-        "media": "/static/your_image_name.jpg", # Yahan apni image ka file path dalen
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     }
 ]
 
+# (Baaki ka code waisa hi hai, bas upar content list change ki hai)
 HTML = """
 <!DOCTYPE html>
 <html>
@@ -69,7 +72,7 @@ HTML = """
                 <div style="padding:5px;">🎧 Support</div>
             </div>
         </div>
-        <div class="nav-btn" style="border-color:#28a745; color:#28a745;">💰 WALLET: ₹0</div>
+        <div class="nav-btn" style="border-color:#28a745; color:#28a745;">💰 WALLET: ₹20</div>
     </div>
 
     {% for i in content %}
