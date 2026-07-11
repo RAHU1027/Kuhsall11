@@ -4,7 +4,7 @@ import os
 # --- WEB SERVICE ---
 app = Flask(__name__)
 
-# --- ORIGINAL DATA ---
+# --- AAPKA ORIGINAL DATA (NO CHANGES) ---
 T1 = """😍 <b>80000+ zip file's Channel</b> 💔
 <br>━━━━━━━━━━━━━━━━━━━━<br>
 <b>Benefits:</b>
@@ -78,23 +78,20 @@ Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>
 
 data_list = [T1, T2, T3, T4, T5, T6]
 
-# --- WEBSITE DESIGN ---
+# --- DESIGN (Screenshot style) ---
 HTML = """
 <!DOCTYPE html>
 <html>
-<body style="background:#000; color:#fff; font-family:sans-serif; text-align:center;">
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="background:#0b1626; color:#fff; font-family:sans-serif; text-align:center; padding:20px;">
+    
+    <h1 style="color:#f39c12; margin-bottom:20px;">peter adult store</h1>
+    <a href="#" style="background:#0056b3; color:white; padding:15px 50px; border-radius:8px; text-decoration:none; display:inline-block; font-weight:bold; margin-bottom:30px;">DEMO VIDEOS</a>
+
     {% for t in data %}
-    <div style="border:1px solid #333; padding:20px; margin:20px auto; max-width:400px; border-radius:10px;">
-        <p>{{ t|safe }}</p>
-        
-        <div style="display:flex; gap:10px; margin-top:15px;">
-            <button style="flex:1; background:#007bff; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;" onclick="document.getElementById('m{{loop.index}}').style.display='block'">PAYMENT (QR)</button>
-            <a href="#" style="flex:1; background:#28a745; color:white; padding:10px; text-decoration:none; border-radius:5px;">DOWNLOAD</a>
-        </div>
-        
-        <div id="m{{loop.index}}" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:999;" onclick="this.style.display='none'">
-            <img src="/static/qr.png" style="max-width:300px; margin-top:20%;">
-        </div>
+    <div style="background:#15253d; border:2px solid #007bff; padding:20px; margin:15px auto; max-width:400px; border-radius:15px; text-align:left;">
+        <p style="margin-bottom:20px;">{{ t|safe }}</p>
+        <button style="background:#8e6a00; color:white; border:none; padding:15px; width:100%; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer;">BUY NOW</button>
     </div>
     {% endfor %}
 </body>
