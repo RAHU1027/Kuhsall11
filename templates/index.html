@@ -3,20 +3,39 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #0b1622; color: white; font-family: sans-serif; padding: 10px; margin: 0; }
-        .card { background: #182635; border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #2a3d51; }
-        .card img { width: 100%; border-radius: 10px; display: block; }
-        .content { font-size: 14px; white-space: pre-wrap; margin: 15px 0; color: #ccc; }
-        .btn { background: #e50914; color: white; padding: 12px; display: block; text-decoration: none; border-radius: 8px; font-weight: bold; text-align: center; }
+        body { background: #0b1622; color: #ffffff; font-family: sans-serif; padding: 15px; margin: 0; }
+        .card { 
+            background: #182635; border-radius: 12px; padding: 12px; 
+            margin-bottom: 15px; border: 1px solid #2a3d51;
+            display: flex; align-items: center; gap: 15px;
+        }
+        /* Image ko chhota aur fix size diya hai */
+        .card img { 
+            width: 80px; height: 80px; object-fit: cover; 
+            border-radius: 8px; flex-shrink: 0;
+        }
+        /* Content aur button ka layout */
+        .info { flex-grow: 1; }
+        .content { font-size: 13px; color: #ccc; margin-bottom: 8px; line-height: 1.4; }
+        .btn { 
+            background: #e50914; color: white; padding: 8px 12px; 
+            text-decoration: none; border-radius: 6px; font-size: 12px; 
+            font-weight: bold; display: inline-block;
+        }
     </style>
 </head>
 <body>
+
     {% for i in range(1, 7) %}
     <div class="card">
-        <img src="{{ i }}.jpg" alt="Video">
-        <div class="content">{{ data[i-1] }}</div>
-        <a href="/pay/{{ i }}" class="btn">BUY NOW</a>
+        <img src="{{ url_for('static', filename=i|string + '.jpg') }}" alt="Video Thumbnail">
+        
+        <div class="info">
+            <div class="content">{{ data[i-1] }}</div>
+            <a href="/pay/{{ i }}" class="btn">CONTACT ADMIN</a>
+        </div>
     </div>
     {% endfor %}
+
 </body>
 </html>
