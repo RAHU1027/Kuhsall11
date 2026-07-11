@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background-color: #0b1622; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .card { background: #182635; border-radius: 15px; padding: 20px; margin: 15px auto; max-width: 400px; border: 2px solid #2a3d51; }
-        .price-btn { background: #f39c12; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; color: black; cursor: pointer; width: 100%; margin-top: 10px; }
-        .most-popular { color: #f1c40f; font-size: 0.8em; font-weight: bold; }
-        h1 { color: #f39c12; }
+        body { background:#0b1622; color:#fff; font-family:sans-serif; text-align:center; padding:10px; }
+        .card { background:#182635; border:15px; padding:15px; margin:15px auto; max-width:400px; border:1px solid #2a3d51; border-radius:15px; }
+        img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
+        .btn { background:#e50914; color:white; padding:12px; display:block; text-decoration:none; border-radius:8px; font-weight:bold; }
     </style>
 </head>
 <body>
-    <h1>Adult Video Packs</h1>
-    <p>Buy pack of your choice and get instant access</p>
-    
-    {% for title, price, desc in display_data %}
+    {% for item in data %}
     <div class="card">
-        {% if loop.index == 6 %} <div class="most-popular">★ MOST POPULAR</div> {% endif %}
-        <h3>{{ title }}</h3>
-        <p>{{ desc }}</p>
-        <button class="price-btn" onclick="location.href='https://t.me/KUSHAL206'">Buy now ₹{{ price }}</button>
+        <img src="{{ url_for('static', filename='p' + loop.index|string + '.jpg') }}" alt="Image">
+        <p style="white-space: pre-wrap; text-align: left;">{{ item|safe }}</p>
+        <a href="https://t.me/KUSHAL206" class="btn">BUY NOW</a>
     </div>
     {% endfor %}
 </body>
