@@ -1,66 +1,24 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <!-- Ye line confirm karti hai ki browser mobile width ka use kare -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <style>
-        /* Force reset to remove extra margins */
-        * { box-sizing: border-box; }
-        
-        body { 
-            background: #000; 
-            color: #fff; 
-            font-family: sans-serif; 
-            margin: 0; 
-            padding: 8px; /* Thoda padding kam kiya */
-        }
-        
-        .card { 
-            background: #111; 
-            border: 1px solid #222; 
-            border-radius: 10px; 
-            padding: 10px; 
-            margin-bottom: 15px; 
-            width: 100%; /* Force full width */
-        }
-        
-        .card img { 
-            width: 100%; 
-            height: auto; 
-            border-radius: 8px; 
-            display: block; 
-            margin-bottom: 10px; 
-        }
-        
-        .content { 
-            font-size: 14px; 
-            color: #ccc; 
-            margin-bottom: 12px; 
-            line-height: 1.4;
-            word-wrap: break-word; /* Text ko screen ke bahar jaane se rokega */
-        }
-        
-        .btn { 
-            background: #e50914; 
-            color: white; 
-            padding: 12px; 
-            display: block; 
-            text-decoration: none; 
-            border-radius: 6px; 
-            font-weight: bold; 
-            text-align: center; 
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    {% for i in range(1, 7) %}
+    {% set btn_classes = ['btn-red', 'btn-white', 'btn-blue', 'btn-green', 'btn-purple', 'btn-orange'] %}
+    
+    {% for item in data %}
     <div class="card">
-        <img src="{{ url_for('static', filename=i|string + '.jpg') }}" alt="Image" onerror="this.style.display='none'">
-        <div class="content">{{ data[i-1] }}</div>
-        <a href="/pay/{{ i }}" class="btn">CONTACT ADMIN</a>
+        <!-- Image path: static/p1.jpg, static/p2.jpg hona chahiye -->
+        <img src="{{ url_for('static', filename='p' + loop.index|string + '.jpg') }}" 
+             alt="Image" 
+             onerror="this.style.display='none'">
+        
+        <div class="content">{{ item|safe }}</div>
+        
+        <a href="https://t.me/KUSHAL206" class="btn {{ btn_classes[loop.index0 % btn_classes|length] }}">BUY NOW</a>
     </div>
     {% endfor %}
 
