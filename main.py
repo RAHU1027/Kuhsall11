@@ -4,7 +4,7 @@ import os
 # --- WEB SERVICE ---
 app = Flask(__name__)
 
-# --- EXACT VIDEO DATA (Aapka original data) ---
+# --- ORIGINAL DATA ---
 T1 = """😍 <b>80000+ zip file's Channel</b> 💔
 <br>━━━━━━━━━━━━━━━━━━━━<br>
 <b>Benefits:</b>
@@ -76,6 +76,8 @@ VALIDITY - 6 MONTH 🤝
 Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>
 🔥 258 people bought this"""
 
+data_list = [T1, T2, T3, T4, T5, T6]
+
 # --- WEBSITE DESIGN ---
 HTML = """
 <!DOCTYPE html>
@@ -84,7 +86,15 @@ HTML = """
     {% for t in data %}
     <div style="border:1px solid #333; padding:20px; margin:20px auto; max-width:400px; border-radius:10px;">
         <p>{{ t|safe }}</p>
-        <a href="https://t.me/KUSHAL206" style="background:#e50914; color:white; padding:10px; display:block; text-decoration:none; border-radius:5px;">CONTACT ADMIN</a>
+        
+        <div style="display:flex; gap:10px; margin-top:15px;">
+            <button style="flex:1; background:#007bff; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;" onclick="document.getElementById('m{{loop.index}}').style.display='block'">PAYMENT (QR)</button>
+            <a href="#" style="flex:1; background:#28a745; color:white; padding:10px; text-decoration:none; border-radius:5px;">DOWNLOAD</a>
+        </div>
+        
+        <div id="m{{loop.index}}" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:999;" onclick="this.style.display='none'">
+            <img src="/static/qr.png" style="max-width:300px; margin-top:20%;">
+        </div>
     </div>
     {% endfor %}
 </body>
@@ -93,7 +103,7 @@ HTML = """
 
 @app.route('/')
 def home():
-    return render_template_string(HTML, data=[T1, T2, T3, T4, T5, T6])
+    return render_template_string(HTML, data=data_list)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
