@@ -3,24 +3,34 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #0b1622; color: #fff; font-family: sans-serif; margin: 0; padding: 10px; }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .card { background: #182635; border-radius: 15px; padding: 15px; border: 1px solid #2a3d51; }
-        /* Photo ko sahi size dene ke liye */
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .text { font-size: 14px; margin: 10px 0; color: #ddd; white-space: pre-wrap; }
-        .btn { background: #e50914; color: white; padding: 12px; display: block; text-decoration: none; border-radius: 8px; font-weight: bold; text-align: center; }
+        body { margin: 0; display: flex; background: #0b1622; color: white; font-family: sans-serif; }
+        /* Left Menu */
+        .sidebar { width: 200px; background: #182635; height: 100vh; padding: 20px; }
+        /* Main Content */
+        .content { flex: 1; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #1e3044; padding: 15px; border-radius: 10px; }
+        .card img { width: 100%; border-radius: 8px; }
+        .btn { background: #e50914; padding: 10px; width: 100%; border: none; color: white; cursor: pointer; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        {% for i in range(1, 7) %}
-        <div class="card">
-            <img src="{{ url_for('static', filename=i|string + '.jpg') }}" alt="Product">
-            <div class="text">{{ content[i-1]|safe }}</div>
-            <a href="/payment/{{ i }}" class="btn">PURCHASE NOW</a>
+    <div class="sidebar">
+        <h3>My Wallet</h3>
+        <p>Paid: ₹{{ user.paid }}</p>
+        <p>Balance: ₹{{ user.balance }}</p>
+    </div>
+    
+    <div class="content">
+        <div class="grid">
+            {% for item in data %}
+            <div class="card">
+                <img src="{{ loop.index }}.jpg">
+                <p>{{ item }}</p>
+                <button class="btn">PURCHASE</button>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </body>
 </html>
