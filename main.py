@@ -15,7 +15,7 @@ def keep_alive():
         time.sleep(300)
 threading.Thread(target=keep_alive, daemon=True).start()
 
-# --- DATA ---
+# --- ORIGINAL DATA ---
 T1 = "😍 <b>80000+ zip file's Channel</b> 💔"
 T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦"
 T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀"
@@ -94,23 +94,10 @@ def home():
 def verify():
     username = request.form.get('username')
     tid = request.form.get('tid')
-    
-    # Ye tumhare Telegram par notification bhejege
-    msg = f"🔔 NEW PAYMENT\nUser: {username}\nTID: {tid}\n\n[✅ Verify & Send Access Link]"
-    
-    # Inline button ka setup (Ye message tumhare telegram bot par jayega)
-    payload = {
-        "chat_id": ADMIN_ID,
-        "text": msg,
-        "reply_markup": {
-            "inline_keyboard": [[{
-                "text": "✅ Verify & Send Link", 
-                "callback_data": f"verified_{username}"
-            }]]
-        }
-    }
-    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", json=payload)
-    return "Details Submitted! Admin will verify soon."
+    msg = f"🔔 NEW PAYMENT\nUser: {username}\nTID: {tid}\n\n[✅ Verify & Approve Access]"
+    # Telegram Button logic yahan se trigger hogi
+    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", json={"chat_id": ADMIN_ID, "text": msg})
+    return "Details Submitted! Wait for Admin."
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
