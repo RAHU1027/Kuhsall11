@@ -1,47 +1,26 @@
-body {
-    background-color: #121212;
-    color: white;
-    font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    width: 90%;
-    text-align: center;
-    background: #1e1e1e;
-    padding: 25px;
-    border-radius: 20px;
-    border: 1px solid #333;
-}
-
-.title { color: #ff4b2b; margin-bottom: 10px; }
-
-.price-tag {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 20px 0;
-    color: #fff;
-}
-
-.pay-button {
-    width: 100%;
-    padding: 18px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    color: white;
-    /* Gradient Color Effect */
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
-}
-
-.pay-button:active { transform: scale(0.95); }
-
-.footer { margin-top: 15px; font-size: 0.8rem; color: #888; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background-color: #0b1622; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 10px; }
+        .card { background: #182635; border-radius: 15px; padding: 20px; margin: 15px auto; max-width: 400px; border: 2px solid #2a3d51; }
+        .price-btn { background: #f39c12; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; color: black; cursor: pointer; width: 100%; margin-top: 10px; }
+        .most-popular { color: #f1c40f; font-size: 0.8em; font-weight: bold; }
+        h1 { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <h1>Adult Video Packs</h1>
+    <p>Buy pack of your choice and get instant access</p>
+    
+    {% for title, price, desc in display_data %}
+    <div class="card">
+        {% if loop.index == 6 %} <div class="most-popular">★ MOST POPULAR</div> {% endif %}
+        <h3>{{ title }}</h3>
+        <p>{{ desc }}</p>
+        <button class="price-btn" onclick="location.href='https://t.me/KUSHAL206'">Buy now ₹{{ price }}</button>
+    </div>
+    {% endfor %}
+</body>
+</html>
