@@ -11,7 +11,7 @@ T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━�
 T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b><br>🔥 314 people bought this"
 T6 = "🎬 <b>PREMIUM ADULT COLLECTION UPDATED</b> ✅<br>━━━━━━━━━━━━━━━━━━━━<br>MAA-BETA 🖤<br>BAAP-BETI 🖤<br>BHAI-BEHEN 🖤<br>DESI CHOTI BACHIYA 💔<br>AUNTY AND BHABHI 💔<br>INSTAGRAM REELS STARS 💔<br>ONLYFANS FOREIGN 💔<br>HARDCORE AND FOREPLAY 💔<br>AND ALL CATEGORIES IN ONE PACKAGE ✊<br>VALIDITY - 6 MONTH 🤝<br>🔥🔥 100% MONEY BACK GUARANTEE IF NOT SATISFIED<br>Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b><br>🔥 258 people bought this"
 
-# Original Data ko sequence (Photo -> Video) mein set kiya
+# Sequence: Photo -> Video -> Photo -> Video -> Photo -> Video
 content = [
     {"type": "img", "text": T1, "media": "/static/1.jpg"},
     {"type": "vid", "text": T2, "media": "/static/1.mp4"},
@@ -27,10 +27,10 @@ HTML = """
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:70px; }
-        .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; z-index:1000; border-bottom:1px solid #007bff; box-sizing:border-box; font-weight:bold; }
-        .card { background:#15253d; border:1px solid #2c3e50; padding:15px; margin:15px auto; width:95%; max-width:400px; border-radius:15px; box-sizing:border-box; }
-        video, img { width:100%; border-radius:10px; display:block; background:#000; }
+        body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:60px; }
+        .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; z-index:1000; border-bottom:1px solid #007bff; font-weight:bold; }
+        .card { background:#15253d; border:1px solid #2c3e50; padding:15px; margin:15px auto; width:95%; max-width:400px; border-radius:15px; }
+        img, video { width:100%; border-radius:10px; display:block; background:#000; min-height:150px; }
     </style>
 </head>
 <body>
@@ -38,17 +38,14 @@ HTML = """
         <div onclick="alert('Settings Panel')">⚙️ Settings</div>
         <div onclick="alert('Wallet Balance: ₹0')">💰 Wallet: ₹0</div>
     </div>
-
     {% for i in content %}
     <div class="card">
         {% if i.type == 'vid' %}
-            <video controls playsinline preload="metadata">
-                <source src="{{ i.media }}" type="video/mp4">
-            </video>
+            <video controls playsinline preload="auto"><source src="{{ i.media }}" type="video/mp4"></video>
         {% else %}
             <img src="{{ i.media }}" loading="lazy">
         {% endif %}
-        <p style="margin-top:15px; font-size:15px; text-align:left;">{{ i.text|safe }}</p>
+        <p style="margin-top:10px; font-size:14px;">{{ i.text|safe }}</p>
     </div>
     {% endfor %}
 </body>
