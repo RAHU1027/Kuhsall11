@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-# --- TUMHARA ORIGINAL DATA (NO CHANGES) ---
+# --- TUMHARA ORIGINAL DATA ---
 T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!<br>Price: <strike>Rs. 3,999.00</strike> <b>Rs. 999.00</b><br>🔥 174 people bought this"
 T2 = "📽️ <b>AVAILABLE VIDEOS COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅<br>VALIDITY ~ 6 MONTH ⌛<br>PREMIUM QUALITY STUFF ✨<br>• INCEST ( D@RK )<br>• SLEEPING PILLS<br>• ONLY INDIAN<br>🔥 77 people bought this"
 T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b><br>🔥 94 people bought this"
@@ -11,12 +11,11 @@ T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━�
 T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b><br>🔥 314 people bought this"
 T6 = "🎬 <b>PREMIUM ADULT COLLECTION UPDATED</b> ✅<br>━━━━━━━━━━━━━━━━━━━━<br>MAA-BETA 🖤<br>BAAP-BETI 🖤<br>BHAI-BEHEN 🖤<br>DESI CHOTI BACHIYA 💔<br>AUNTY AND BHABHI 💔<br>INSTAGRAM REELS STARS 💔<br>ONLYFANS FOREIGN 💔<br>HARDCORE AND FOREPLAY 💔<br>AND ALL CATEGORIES IN ONE PACKAGE ✊<br>VALIDITY - 6 MONTH 🤝<br>🔥🔥 100% MONEY BACK GUARANTEE IF NOT SATISFIED<br>Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b><br>🔥 258 people bought this"
 
-# Yahan media files map ki hain (T1, T2, T3, T4, T5, T6)
-# .mp4 file hogi to video chalega, .jpg hogi to photo
+# Yahan maine files aur videos map kar di hain
 content = [
     {"text": T1, "media": "/static/1.jpg"},
-    {"text": T2, "media": "/static/video1.mp4"}, 
-    {"text": T3, "media": "/static/3.jpg"},
+    {"text": T2, "media": "/static/1.mp4"}, # Video 1
+    {"text": T3, "media": "/static/3.mp4"}, # Video 2
     {"text": T4, "media": "/static/2.jpg"},
     {"text": T5, "media": "/static/3.jpg"},
     {"text": T6, "media": "/static/1.jpg"}
