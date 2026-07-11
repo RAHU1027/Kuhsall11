@@ -3,22 +3,22 @@ import os
 
 app = Flask(__name__)
 
-# --- TUMHARA ORIGINAL DATA ---
-T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!<br>Price: <strike>Rs. 3,999.00</strike> <b>Rs. 999.00</b><br>🔥 174 people bought this"
-T2 = "📽️ <b>AVAILABLE VIDEOS COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅<br>VALIDITY ~ 6 MONTH ⌛<br>PREMIUM QUALITY STUFF ✨<br>• INCEST ( D@RK )<br>• SLEEPING PILLS<br>• ONLY INDIAN<br>🔥 77 people bought this"
-T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b><br>🔥 94 people bought this"
-T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct P#rn Video Channel 🫧<br>D#si Maal Ke Deewan 🥀 Ke Liye ✨<br>51000+ rare D#si le#ks ever.... 😍<br>Just pay and get entry... 💸<br>Direct video - No Ads Sh#t 🚫<br>Validity :- lifetime ✅<br>Price: <strike>Rs. 249.00</strike> <b>Rs. 99.00</b><br>🔥 55 people bought this"
-T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b><br>🔥 314 people bought this"
-T6 = "🎬 <b>PREMIUM ADULT COLLECTION UPDATED</b> ✅<br>━━━━━━━━━━━━━━━━━━━━<br>MAA-BETA 🖤<br>BAAP-BETI 🖤<br>BHAI-BEHEN 🖤<br>DESI CHOTI BACHIYA 💔<br>AUNTY AND BHABHI 💔<br>INSTAGRAM REELS STARS 💔<br>ONLYFANS FOREIGN 💔<br>HARDCORE AND FOREPLAY 💔<br>AND ALL CATEGORIES IN ONE PACKAGE ✊<br>VALIDITY - 6 MONTH 🤝<br>🔥🔥 100% MONEY BACK GUARANTEE IF NOT SATISFIED<br>Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b><br>🔥 258 people bought this"
+# --- TUMHARA ORIGINAL DATA (Fixed) ---
+T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!"
+T2 = "📽️ <b>AVAILABLE VIDEOS COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅<br>VALIDITY ~ 6 MONTH ⌛"
+T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b>"
+T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct video - No Ads Sh#t 🚫<br>Price: <strike>Rs. 249.00</strike> <b>Rs. 99.00</b>"
+T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b>"
+T6 = "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅<br>━━━━━━━━━━━━━━━━━━━━<br>100% MONEY BACK GUARANTEE<br>Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>"
 
-# Sequence: Photo -> Video -> Photo -> Video -> Photo -> Video
+# Mapping data (Price aur type ke saath)
 content = [
-    {"type": "img", "text": T1, "media": "/static/1.jpg"},
-    {"type": "vid", "text": T2, "media": "/static/1.mp4"},
-    {"type": "img", "text": T3, "media": "/static/3.jpg"},
-    {"type": "vid", "text": T4, "media": "/static/3.mp4"},
-    {"type": "img", "text": T5, "media": "/static/2.jpg"},
-    {"type": "vid", "text": T6, "media": "/static/1.mp4"}
+    {"type": "img", "text": T1, "media": "/static/1.jpg", "price": "₹999"},
+    {"type": "vid", "text": T2, "media": "/static/1.mp4", "price": "₹499"},
+    {"type": "img", "text": T3, "media": "/static/3.jpg", "price": "₹149"},
+    {"type": "vid", "text": T4, "media": "/static/3.mp4", "price": "₹99"},
+    {"type": "img", "text": T5, "media": "/static/2.jpg", "price": "₹69"},
+    {"type": "vid", "text": T6, "media": "/static/1.mp4", "price": "₹49"}
 ]
 
 HTML = """
@@ -27,10 +27,11 @@ HTML = """
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:60px; }
+        body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:70px; }
         .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; z-index:1000; border-bottom:1px solid #007bff; font-weight:bold; }
         .card { background:#15253d; border:1px solid #2c3e50; padding:15px; margin:15px auto; width:95%; max-width:400px; border-radius:15px; }
-        img, video { width:100%; border-radius:10px; display:block; background:#000; min-height:150px; }
+        img, video { width:100%; border-radius:10px; display:block; background:#000; min-height:200px; }
+        .buy-btn { display:block; width:100%; background:#28a745; color:white; text-align:center; padding:12px; margin-top:10px; border-radius:8px; text-decoration:none; font-weight:bold; }
     </style>
 </head>
 <body>
@@ -41,11 +42,13 @@ HTML = """
     {% for i in content %}
     <div class="card">
         {% if i.type == 'vid' %}
-            <video controls playsinline preload="auto"><source src="{{ i.media }}" type="video/mp4"></video>
+            <video controls playsinline preload="metadata"><source src="{{ i.media }}" type="video/mp4"></video>
         {% else %}
-            <img src="{{ i.media }}" loading="lazy">
+            <img src="{{ i.media }}">
         {% endif %}
-        <p style="margin-top:10px; font-size:14px;">{{ i.text|safe }}</p>
+        <p style="margin-top:15px; font-size:15px;">{{ i.text|safe }}</p>
+        <p style="font-size:18px; color:#ffc107; font-weight:bold;">Price: {{ i.price }}</p>
+        <a href="#" class="buy-btn">BUY NOW</a>
     </div>
     {% endfor %}
 </body>
