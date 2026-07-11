@@ -7,22 +7,18 @@ app = Flask(__name__)
 # --- CONFIGURATION ---
 TELEGRAM_BOT_TOKEN = "8991320152:AAFLJcXRpfQi3P-Wgap0bF8e5wIscG4XxY0"
 TELEGRAM_CHAT_ID = "6632236983"
+# YAHA APNA RENDER URL DALEIN (Jaise: https://myapp.onrender.com)
+DOMAIN = "https://aapka-domain.onrender.com" 
 
-# --- TUMHARA ORIGINAL DATA ---
-T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!"
-T2 = "📽️ <b>AVAILABLE VIDEOS COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅<br>VALIDITY ~ 6 MONTH ⌛"
+# --- TUMHARA ORIGINAL CONTENT (Video hata diya) ---
+T1 = "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br><b>Benefits:</b><br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed"
+T2 = "🎁 <b>PREMIUM COLLECTION</b> 🎁<br>━━━━━━━━━━━━━━━━━━━━<br>REAL PRICE - <strike>2499/-</strike><br>OFFER PRICE - <b>499/-</b> ✅"
 T3 = "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 299.00</strike> <b>Rs. 149.00</b>"
-T4 = "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct video - No Ads Sh#t 🚫<br>Price: <strike>Rs. 249.00</strike> <b>Rs. 99.00</b>"
-T5 = "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━<br>Price: <strike>Rs. 259.00</strike> <b>Rs. 69.00</b>"
-T6 = "🎬 <b>PREMIUM ADULT COLLECTION</b> ✅<br>━━━━━━━━━━━━━━━━━━━━<br>100% MONEY BACK GUARANTEE<br>Price: <strike>Rs. 799.00</strike> <b>Rs. 49.00</b>"
 
 content = [
-    {"type": "img", "text": T1, "media": "/static/1.jpg", "price": "₹999"},
-    {"type": "vid", "text": T2, "media": "/static/1.mp4", "price": "₹499"},
-    {"type": "img", "text": T3, "media": "/static/3.jpg", "price": "₹149"},
-    {"type": "vid", "text": T4, "media": "/static/3.mp4", "price": "₹99"},
-    {"type": "img", "text": T5, "media": "/static/2.jpg", "price": "₹69"},
-    {"type": "vid", "text": T6, "media": "/static/1.mp4", "price": "₹49"}
+    {"text": T1, "media": "/static/1.jpg", "price": "₹999"},
+    {"text": T2, "media": "/static/2.jpg", "price": "₹499"},
+    {"text": T3, "media": "/static/3.jpg", "price": "₹149"}
 ]
 
 HTML = """
@@ -34,7 +30,7 @@ HTML = """
         body { background:#0b1626; color:#fff; font-family:sans-serif; margin:0; padding-top:70px; }
         .header { position:fixed; top:0; width:100%; background:#15253d; padding:15px; display:flex; justify-content:space-between; z-index:1000; border-bottom:1px solid #007bff; }
         .card { background:#15253d; border:1px solid #2c3e50; padding:15px; margin:15px auto; width:95%; max-width:400px; border-radius:15px; }
-        img, video { width:100%; border-radius:10px; display:block; background:#000; min-height:200px; }
+        img { width:100%; border-radius:10px; display:block; }
         .btn-demo { background:#ffc107; color:black; padding:8px; margin-bottom:10px; border-radius:5px; font-weight:bold; text-align:center; cursor:pointer; }
         .buy-btn { display:block; width:100%; background:#28a745; color:white; text-align:center; padding:12px; border-radius:8px; text-decoration:none; font-weight:bold; cursor:pointer; }
         .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:2000; justify-content:center; align-items:center; }
@@ -50,8 +46,7 @@ HTML = """
     </div>
     {% for i in content %}
     <div class="card">
-        {% if i.type == 'vid' %}<video controls playsinline><source src="{{ i.media }}" type="video/mp4"></video>
-        {% else %}<img src="{{ i.media }}">{% endif %}
+        <img src="{{ i.media }}">
         <p style="margin-top:15px; font-size:15px;">{{ i.text|safe }}</p>
         <p style="font-size:18px; color:#ffc107; font-weight:bold;">Price: {{ i.price }}</p>
         <div class="btn-demo" onclick="alert('Demo Loading...')">FREE DEMO</div>
@@ -72,25 +67,21 @@ HTML = """
 
     <script>
         let timerInterval;
-        function showPayment() { 
-            document.getElementById('paymentPopup').style.display = 'flex';
-            startTimer(240);
-        }
+        function showPayment() { document.getElementById('paymentPopup').style.display = 'flex'; startTimer(240); }
         function startTimer(duration) {
             clearInterval(timerInterval);
-            let timer = duration, minutes, seconds;
+            let timer = duration, m, s;
             timerInterval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                document.getElementById('timer').textContent = (minutes < 10 ? "0"+minutes : minutes) + ":" + (seconds < 10 ? "0"+seconds : seconds);
+                m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
+                document.getElementById('timer').textContent = (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
                 if (--timer < 0) { clearInterval(timerInterval); document.getElementById('paymentPopup').style.display = 'none'; }
             }, 1000);
         }
         function verifyPayment() {
             let tid = document.getElementById('txId').value;
             let amt = document.getElementById('amount').value;
-            fetch('/verify-payment', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({txId: tid, amount: amt}) })
-            .then(res => res.json()).then(data => { alert(data.message); });
+            fetch('/verify-payment', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({txId:tid, amount:amt}) })
+            .then(res=>res.json()).then(data=>{ alert(data.message); document.getElementById('paymentPopup').style.display = 'none'; });
         }
     </script>
 </body>
@@ -98,18 +89,21 @@ HTML = """
 """
 
 @app.route('/')
-def home():
-    return render_template_string(HTML, content=content)
+def home(): return render_template_string(HTML, content=content)
 
 @app.route('/verify-payment', methods=['POST'])
 def verify_payment():
     data = request.json
     tid = data.get('txId')
     amt = data.get('amount')
-    msg = f"🔔 *New Payment Request*\n💰 Amount: ₹{amt}\n🆔 Trans ID: {tid}"
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id={TELEGRAM_CHAT_ID}&text={msg}&parse_mode=Markdown"
-    requests.get(url)
+    msg = f"🔔 *New Payment Request*\n💰 Amount: ₹{amt}\n🆔 Trans ID: {tid}\n\n[✅ CLICK TO VERIFY]({DOMAIN}/admin-verify/{tid})"
+    requests.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage?chat_id={TELEGRAM_CHAT_ID}&text={msg}&parse_mode=Markdown")
     return jsonify({"message": "Request sent to Admin!"})
+
+@app.route('/admin-verify/<tid>')
+def admin_verify(tid):
+    with open("verified_ids.txt", "a") as f: f.write(tid + "\n")
+    return "<h1>Payment Verified Successfully!</h1>"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
