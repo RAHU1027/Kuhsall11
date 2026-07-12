@@ -34,13 +34,13 @@ content = [
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "video",
         "media": "/static/2.mp4", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     },
     {
         "text": "🔞 <b>PREMIUM DESI MAAL 2</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/2.jpg", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 140.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     }
 ]
 
