@@ -19,7 +19,7 @@ content = [
         "price": "Rs. 799.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
     {
-        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
+        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹120/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
         "media_type": "video",
         "media": "/static/1.mp4", 
         "price": "Rs. 120.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
