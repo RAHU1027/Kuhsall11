@@ -60,9 +60,20 @@ HTML = """
         .box { background:#15253d; padding:20px; border-radius:15px; width:85%; border:1px solid #333; text-align:center; position:relative; }
         .back-btn { position:absolute; top:10px; right:10px; color:#ff4d4d; cursor:pointer; font-weight:bold; font-size:11px; }
         .menu { display:none; position:absolute; top:45px; left:10px; background:#1e2a38; border-radius:10px; padding:10px; border:1px solid #007bff; width:120px; z-index:1001; }
+        /* Welcome Overlay */
+        #welcome-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; }
+        .ok-btn { background:#007bff; color:white; padding:12px 30px; border:none; border-radius:25px; font-weight:bold; cursor:pointer; margin-top:20px; }
     </style>
 </head>
 <body>
+    <div id="welcome-overlay">
+        <div>
+            <h2>Welcome to Premium Access</h2>
+            <p style="color:#aaa;">Category wise content niche diya gaya hai.<br>Payment ke liye 'Unlock Premium' par click karein.</p>
+            <button class="ok-btn" onclick="document.getElementById('welcome-overlay').style.display='none'">OK, GOT IT</button>
+        </div>
+    </div>
+
     <div class="header">
         <div style="position:relative;">
             <div class="nav-btn" onclick="document.getElementById('m').style.display='block'">⚙️ SETTINGS</div>
