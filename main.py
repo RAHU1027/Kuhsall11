@@ -14,30 +14,31 @@ init_db()
 content = [
     {
         "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
+        "media_type": "img",
         "media": "/static/1.jpg", 
         "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
     {
-        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>"
-                "━━━━━━━━━━━━━━━━━━━━<br>"
-                "🔥 ALL TYPE AVAILABLE<br>"
-                "✨ 90% OFF SALE<br>"
-                "👇 CLICK SHOP NOW 👇", 
-        "media": "/static/2.mp4", 
+        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
+        "media_type": "video",
+        "media": "/static/1.mp4", 
         "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
     },
     {
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media_type": "img",
         "media": "/static/3.jpg", 
         "price": "Rs. 149.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
     },
     {
-        "text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct P#rn Video Channel 🫧<br>D#si Maal Ke Deewan 🥀 Ke Liye ✨<br>51000+ rare D#si le#ks ever.... 😍<br><br>Just pay and get entry... 💸<br>D#rect video - No Ads Sh#t 🚫<br>Validity :- lifetime ✅", 
-        "media": "/static/3.jpg", 
-        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 55 people bought this</span>"
+        "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media_type": "video",
+        "media": "/static/2.mp4", 
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     },
     {
-        "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
+        "text": "🔞 <b>PREMIUM DESI MAAL 2</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media_type": "img",
         "media": "/static/2.jpg", 
         "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     }
@@ -76,7 +77,13 @@ HTML = """
 
     {% for i in content %}
     <div class="card">
-        <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
+        {% if i.media_type == 'video' %}
+            <video width="100%" controls style="border-radius:10px;">
+                <source src="{{ i.media }}" type="video/mp4">
+            </video>
+        {% else %}
+            <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
+        {% endif %}
         <p>{{ i.text|safe }}</p>
         <p style="color:#ffc107; font-weight:bold;">Price: {{ i.price|safe }}</p>
         <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
@@ -143,9 +150,8 @@ def verify():
     conn.close()
     return """
     <h3 style='color:green;'>✅ Payment Verified! Access Mil Gaya!</h3>
-    <p>💋 WATCH VIRAL MEMES FULL VIDEO 💋</p>
-    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00d4ff;'>⚡️ JOIN OUR CHANNEL: 💋 𝐃𝐄𝐒𝐈 𝐌𝐀𝐀𝐋 💋</a><br><br>
-    <a href='https://t.me/+b9VNf96P_Z9mNjk1' style='color:#00d4ff;'>❤️‍🔥 𝗝𝗔𝗣𝗔𝗡𝗘𝗦𝗘 𝗛𝗨𝗕 ❤️‍🔥</a>
+    <p>💋 WATCH VIDEO 💋</p>
+    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00d4ff;'>⚡️ JOIN CHANNEL</a>
     """
 
 if __name__ == "__main__":
