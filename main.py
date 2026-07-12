@@ -16,31 +16,31 @@ content = [
         "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
         "media_type": "img",
         "media": "/static/1.jpg", 
-        "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
+        "price": "Rs. 799.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
     {
         "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
         "media_type": "video",
         "media": "/static/1.mp4", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
+        "price": "Rs. 120.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
     },
     {
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/3.jpg", 
-        "price": "Rs. 149.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 199.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
     },
     {
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "video",
         "media": "/static/2.mp4", 
-        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 499.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     },
     {
         "text": "🔞 <b>PREMIUM DESI MAAL 2</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/2.jpg", 
-        "price": "Rs. 140.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     }
 ]
 
