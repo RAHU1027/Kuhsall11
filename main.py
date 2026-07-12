@@ -31,7 +31,7 @@ content = [
         "price": "249",
         "sold": "50+"
     }
-]
+
     {
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media": "/static/3.jpg", 
