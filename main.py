@@ -23,7 +23,7 @@ content = [
                 "🔥 ALL TYPE AVAILABLE<br>"
                 "✨ 90% OFF SALE<br>"
                 "👇 CLICK SHOP NOW 👇", 
-        "media": ", "/static/2.mp4"
+        "media": "/static/2.mp4", 
         "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
     },
     {
