@@ -13,39 +13,14 @@ init_db()
 
 content = [
     {
-        "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
-        "media": "/static/1.jpg", 
-        "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
-    },
-    Content list update karein
-content = [
-    {
-        "text": "UNLIMITED VIDEOS 🔞 <br> ━━━━━━━━━━━━ <br> C | P COLECTION <br> R | 7 COLECTION <br> M$M S@N <br> Br@ - Si& <br> P£D MØM <br> Fämily ins.ect <br> For.ce File$ <br> Hidden camerä <br> Hijâb Dësî",
-        "media": "/static/video1.mp4", # Apni video file ka path yahan rakhein
-        "price": "499",
-        "sold": "100+"
+        "text": "🔥 <b>UNLIMITED VIDEOS</b> 🔞<br>━━━━━━━━━━━━━━━━━━━━<br>• C | P COLECTION<br>• R | 7 COLECTION<br>• M$M S@N<br>• Br@ - Si&<br>• P£D MØM<br>• Fämily ins.ect<br>• For.ce File$<br>• Hidden camerä<br>• Hijâb Dësî", 
+        "media": "/static/1.mp4", 
+        "price": "Rs. 499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 999.00</span><br><span style='color:red;'>🔥 100+ people bought this</span>"
     },
     {
-        "text": "PAID CHANNEL 🔞 <br> ━━━━━━━━━━━━ <br> C || P COLECTION <br> R || P COLECTION <br> M$M S@N <br> Br@ - Si& <br> Fämily ins.ect <br> For.ce File$ <br> Hidden camerä <br> Hijâb Dësî",
-        "media": "/static/video2.mp4", # Apni video file ka path yahan rakhein
-        "price": "249",
-        "sold": "50+"
-    }
-
-    {
-        "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
-        "media": "/static/3.jpg", 
-        "price": "Rs. 149.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 299.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
-    },
-    {
-        "text": "🎀 <b>PREMIUM CUTIES LEAK</b> 🎀<br>━━━━━━━━━━━━━━━━━━━━<br>🤡 HELLO USER<br>Direct P#rn Video Channel 🫧<br>D#si Maal Ke Deewan 🥀 Ke Liye ✨<br>51000+ rare D#si le#ks ever.... 😍<br><br>Just pay and get entry... 💸<br>D#rect video - No Ads Sh#t 🚫<br>Validity :- lifetime ✅", 
-        "media": "/static/3.jpg", 
-        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 55 people bought this</span>"
-    },
-    {
-        "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
-        "media": "/static/2.jpg", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 259.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "text": "💎 <b>PAID CHANNEL</b> 🔞<br>━━━━━━━━━━━━━━━━━━━━<br>• C || P COLECTION<br>• R || P COLECTION<br>• M$M S@N<br>• Br@ - Si&<br>• Fämily ins.ect<br>• For.ce File$<br>• Hidden camerä<br>• Hijâb Dësî", 
+        "media": "/static/2.mp4", 
+        "price": "Rs. 249.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 499.00</span><br><span style='color:red;'>🔥 50+ people bought this</span>"
     }
 ]
 
@@ -82,7 +57,9 @@ HTML = """
 
     {% for i in content %}
     <div class="card">
-        <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
+        <video width="100%" controls style="border-radius:10px;">
+            <source src="{{ i.media }}" type="video/mp4">
+        </video>
         <p>{{ i.text|safe }}</p>
         <p style="color:#ffc107; font-weight:bold;">Price: {{ i.price|safe }}</p>
         <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
