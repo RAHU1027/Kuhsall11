@@ -17,15 +17,21 @@ content = [
         "media": "/static/1.jpg", 
         "price": "Rs. 1,499.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
+    Content list update karein
+content = [
     {
-        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹69/-</b> 💦<br>"
-                "━━━━━━━━━━━━━━━━━━━━<br>"
-                "🔥 ALL TYPE AVAILABLE<br>"
-                "✨ 90% OFF SALE<br>"
-                "👇 CLICK SHOP NOW 👇", 
-        "media": "/static/2.mp4", 
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 699.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
+        "text": "UNLIMITED VIDEOS 🔞 <br> ━━━━━━━━━━━━ <br> C | P COLECTION <br> R | 7 COLECTION <br> M$M S@N <br> Br@ - Si& <br> P£D MØM <br> Fämily ins.ect <br> For.ce File$ <br> Hidden camerä <br> Hijâb Dësî",
+        "media": "/static/video1.mp4", # Apni video file ka path yahan rakhein
+        "price": "499",
+        "sold": "100+"
     },
+    {
+        "text": "PAID CHANNEL 🔞 <br> ━━━━━━━━━━━━ <br> C || P COLECTION <br> R || P COLECTION <br> M$M S@N <br> Br@ - Si& <br> Fämily ins.ect <br> For.ce File$ <br> Hidden camerä <br> Hijâb Dësî",
+        "media": "/static/video2.mp4", # Apni video file ka path yahan rakhein
+        "price": "249",
+        "sold": "50+"
+    }
+]
     {
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media": "/static/3.jpg", 
