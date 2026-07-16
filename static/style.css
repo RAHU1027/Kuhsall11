@@ -1,34 +1,90 @@
-/* Piche ka background white aur text black */
-body { 
-    background: #ffffff; 
-    color: #000000; 
-    font-family: sans-serif; 
-    margin: 0; 
-    padding-top: 70px; 
+*{
+    margin: 0;
+    padding: 0;
 }
 
-.header { 
-    position: fixed; top: 0; width: 100%; background: #ffffff; padding: 10px; 
-    display: flex; justify-content: space-between; align-items: center; 
-    z-index: 1000; border-bottom: 2px solid #ddd; 
+body{
+    background: black;
+}
+.container{
+    background-image: url('ar.jpg');
+    max-width: 350px;
+    margin: 0 auto;
+    border: 1px solid white;
+    height: 100vh;
+    background-size: cover;
 }
 
-.card { 
-    background: #ffffff; padding: 15px; margin: 15px auto; width: 90%; 
-    border-radius: 15px; border: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+.login-box{
+    max-width: 90%;
+    min-height:300px;
+    margin: auto;
+    border-radius: 12px;
+    background-image: url('lp.jpg');
+    position: relative;
+    background-size: cover;
+    top: 50%;
+    transform: translate(0 , -50%);
+    color: white;
+    box-shadow: 4px 4px 10px black;
 }
 
-/* FREE DEMO - Yellow */
-.btn-demo { 
-    background: #ffc107; color: #000; width: 100%; padding: 10px; 
-    margin-bottom: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; 
+.heading{
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 22px;
+    margin: 40px auto;
+    max-width: 80%;
+    height: 40px;
+    display: flex;
+    border-bottom: 1px solid rgb(246, 244, 244);
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+label{
+    display: block;
 }
 
-/* UNLOCK PREMIUM - Red */
-.btn-buy { 
-    background: #ff0000; color: #fff; width: 100%; padding: 10px; 
-    border: none; border-radius: 5px; font-weight: bold; cursor: pointer; 
+input{
+    margin-bottom: 20px;
+    padding: 10px 82px;
+    padding-left: 4px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 6px;
+    font-family: sans-serif;
+}
+button{
+    display: block;
+    padding: 8px 26px;
+    border-radius: 4px;
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+    outline: none;
+    background: rgb(255, 255, 255);
+}
+.form p{
+    color: white;    
+    font-weight: 800;
+    margin: 10PX 0;
+    text-align: center;
 }
 
-.popup { background: rgba(255, 255, 255, 0.98); }
-.box { background: #ffffff; border: 1px solid #ddd; }
+.form p a{
+    text-decoration: underline;
+    font-weight: 800;
+    color: rgb(255, 206, 29);
+}
+
+.box{
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    color: white;
+    background-image: url('lp.jpg');
+}
