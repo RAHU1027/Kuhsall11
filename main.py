@@ -57,29 +57,40 @@ HTML = """
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Modern dark gradient background & unique bold large capital letters */
-        body { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color:#fff; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding-top:70px; min-height: 100vh; text-transform: uppercase; }
-        .header { position:fixed; top:0; width:100%; background:rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,0.1); }
-        .nav-btn { font-size:11px; font-weight:900; letter-spacing: 1px; color:#38bdf8; padding:6px 10px; border-radius:5px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); white-space:nowrap; cursor:pointer; }
-        .card { background:rgba(30, 41, 59, 0.7); backdrop-filter: blur(5px); padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+        /* Modern red solid background & unique bold large capital letters */
+        body { background: #dc2626; color:#fff; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding-top:70px; padding-bottom:70px; min-height: 100vh; text-transform: uppercase; }
+        .header { position:fixed; top:0; width:100%; background:rgba(153, 0, 0, 0.95); backdrop-filter: blur(10px); padding:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,0.2); }
+        .nav-btn { font-size:11px; font-weight:900; letter-spacing: 1px; color:#fff; padding:6px 10px; border-radius:5px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); white-space:nowrap; cursor:pointer; }
+        .card { background:rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
         
         /* Unique Bold Large Typography Styling */
-        .card p { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.5; }
-        .card b { font-size: 16px; letter-spacing: 1px; color: #f8fafc; }
+        .card p { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.5; color: #e0e0e0; }
+        .card b { font-size: 16px; letter-spacing: 1px; color: #fff; }
 
-        .btn-demo { background:#ffc107; color:black; width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:5px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; }
+        .btn-demo { background:#ffeb3b; color:black; width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:5px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; }
         .btn-buy { background:#28a745; color:white; width:100%; padding:10px; border:none; border-radius:5px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; }
-        .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; }
-        .box { background:#1e293b; padding:20px; border-radius:15px; width:85%; border:1px solid rgba(255,255,255,0.1); text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .box h3 { font-size: 16px; font-weight: 900; letter-spacing: 1px; }
-        .back-btn { position:absolute; top:10px; right:10px; color:#ff4d4d; cursor:pointer; font-weight:900; font-size:11px; letter-spacing: 1px; }
-        .menu { display:none; position:absolute; top:45px; left:10px; background:#1e293b; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.1); width:120px; z-index:1001; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 11px; font-weight: 800; }
+        .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; }
+        .box { background:#4a0000; padding:20px; border-radius:15px; width:85%; border:1px solid rgba(255,255,255,0.2); text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .box h3 { font-size: 16px; font-weight: 900; letter-spacing: 1px; color: #fff; }
+        .back-btn { position:absolute; top:10px; right:10px; color:#ffcccc; cursor:pointer; font-weight:900; font-size:11px; letter-spacing: 1px; }
+        .menu { display:none; position:absolute; top:45px; left:10px; background:#990000; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.2); width:120px; z-index:1001; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 11px; font-weight: 800; color: white; }
         
         /* Welcome Overlay */
-        #welcome-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; }
+        #welcome-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:#cc0000; z-index:10000; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; }
         #welcome-overlay h2 { font-size: 20px; font-weight: 900; letter-spacing: 1px; color: #fff; }
-        #welcome-overlay p { font-size: 11px; font-weight: 700; color:#aaa; letter-spacing: 0.5px; }
-        .ok-btn { background:#007bff; color:white; padding:12px 30px; border:none; border-radius:25px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; margin-top:20px; }
+        #welcome-overlay p { font-size: 11px; font-weight: 700; color:#ffcccc; letter-spacing: 0.5px; }
+        .ok-btn { background:#fff; color:#cc0000; padding:12px 30px; border:none; border-radius:25px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; margin-top:20px; }
+
+        /* Bottom Navigation Bar & Admin Button Styles */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(153, 0, 0, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.2); z-index: 1000; box-sizing: border-box; }
+        .nav-item { text-align: center; color: #aaa; cursor: pointer; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-decoration: none; }
+        .nav-item.active { color: #ffeb3b; }
+        .nav-item div { font-size: 18px; margin-bottom: 2px; }
+        .float-admin { position: fixed; bottom: 70px; right: 20px; background: #0088cc; color: white; padding: 10px 18px; border-radius: 25px; font-size: 11px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 999; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        .store-title { text-align: center; font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 20px 0; color: #ffeb3b; }
+        .review-card, .profile-card { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255,255,255,0.1); width: 90%; margin: 15px auto; padding: 15px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
@@ -95,29 +106,95 @@ HTML = """
         <div style="position:relative;">
             <div class="nav-btn" onclick="document.getElementById('m').style.display='block'">⚙️ SETTINGS</div>
             <div id="m" class="menu" onclick="this.style.display='none'">
-                <div style="padding:5px; cursor:pointer;">👤 PROFILE</div>
-                <div style="padding:5px; cursor:pointer;">💳 ADD FUNDS</div>
-                <div style="padding:5px; cursor:pointer;">🎧 SUPPORT</div>
+                <div style="padding:5px; cursor:pointer;" onclick="switchPage('profile', document.querySelectorAll('.nav-item')[2])">👤 PROFILE</div>
+                <div style="padding:5px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166')">💳 ADD FUNDS</div>
+                <div style="padding:5px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166')">🎧 SUPPORT</div>
             </div>
         </div>
-        <div class="nav-btn" style="border-color:#28a745; color:#28a745;" id="wallet-display">💰 WALLET: ₹{{ total_wallet }}</div>
+        <div class="nav-btn" style="border-color:#fff; color:#fff;" id="wallet-display">💰 WALLET: ₹{{ total_wallet }}</div>
     </div>
 
-    {% for i in content %}
-    <div class="card">
-        {% if i.media_type == 'video' %}
-            <video width="100%" controls style="border-radius:10px;">
-                <source src="{{ i.media }}" type="video/mp4">
-            </video>
-        {% else %}
-            <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
-        {% endif %}
-        <p>{{ i.text|safe }}</p>
-        <p style="color:#ffc107; font-weight:900; font-size:14px;">PRICE: {{ i.price|safe }}</p>
-        <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
-        <button class="btn-buy" onclick="showPopup('{{ i.price_val }}')">UNLOCK PREMIUM</button>
+    <!-- Working Contact Admin Button -->
+    <a href="https://t.me/Skjsbsh166" target="_blank" class="float-admin">
+        ✈️ Contact Admin
+    </a>
+
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page-section active">
+        <div class="store-title">✨ CP STORE</div>
+        {% for i in content %}
+        <div class="card">
+            {% if i.media_type == 'video' %}
+                <video width="100%" controls style="border-radius:10px;">
+                    <source src="{{ i.media }}" type="video/mp4">
+                </video>
+            {% else %}
+                <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
+            {% endif %}
+            <p>{{ i.text|safe }}</p>
+            <p style="color:#ffeb3b; font-weight:900; font-size:14px;">PRICE: {{ i.price|safe }}</p>
+            <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
+            <button class="btn-buy" onclick="showPopup('{{ i.price_val }}')">UNLOCK PREMIUM</button>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
+    <!-- REVIEWS PAGE -->
+    <div id="page-reviews" class="page-section">
+        <div class="store-title">✨ CP STORE</div>
+        <div style="text-align:center; font-size:12px; font-weight:700; color:#ffcccc; margin-bottom:15px;">⭐ Customer Reviews<br><span style="font-size:10px; color:#aaa;">Sirf verified purchasers feedback de sakte hain</span></div>
+        
+        <div class="review-card">
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
+            <p style="font-size:13px; margin:10px 0;">"49 rs best ha bro"</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 DESI MALAYALAM AUNTY</div>
+        </div>
+        
+        <div class="review-card">
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
+            <p style="font-size:13px; margin:10px 0;">"Best"</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 10 INDIAN CP FILE</div>
+        </div>
+
+        <div class="review-card">
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
+            <p style="font-size:13px; margin:10px 0;">"199 rs is best"</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 INDIAN CP</div>
+        </div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="page-profile" class="page-section">
+        <div class="store-title">✨ CP STORE</div>
+        <div class="profile-card" style="text-align:center;">
+            <div style="font-size:40px; margin-bottom:10px;">👤</div>
+            <div style="font-size:16px; font-weight:900; color:#fff;">Tu6</div>
+            <div style="display:inline-block; background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:15px; font-size:11px; margin-top:10px; border:1px solid rgba(255,255,255,0.2);">User ID: 7435</div>
+        </div>
+        
+        <div class="profile-card" style="text-align:center;">
+            <div style="font-size:11px; color:#aaa;">TOTAL PURCHASES</div>
+            <div style="font-size:22px; font-weight:900; color:#ffeb3b; margin-top:5px;">0</div>
+        </div>
+
+        <div class="profile-card" style="text-align:center;">
+            <div style="font-size:11px; color:#aaa;">MEMBER SINCE</div>
+            <div style="font-size:16px; font-weight:900; color:#ffeb3b; margin-top:5px;">Mar 2026</div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchPage('home', this)">
+            <div>🏠</div> Home
+        </div>
+        <div class="nav-item" onclick="switchPage('reviews', this)">
+            <div>⭐</div> Reviews
+        </div>
+        <div class="nav-item" onclick="switchPage('profile', this)">
+            <div>👤</div> Profile
+        </div>
+    </div>
 
     <div id="p" class="popup">
         <div class="box" id="content-box">
@@ -125,7 +202,7 @@ HTML = """
             <h3>PAY & ADD DETAILS ✍️</h3>
             <div id="timer" style="color:yellow; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
             <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
-            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#0f172a; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#990000; border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
             <button class="btn-buy" onclick="verify()">SUBMIT DETAILS</button>
         </div>
     </div>
@@ -133,6 +210,16 @@ HTML = """
     <script>
         let timerInterval;
         let currentPrice = 0;
+        
+        function switchPage(pageId, element) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('page-' + pageId).classList.add('active');
+            if(element) element.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
         function showPopup(price) { 
             currentPrice = price;
             document.getElementById('p').style.display = 'flex'; 
@@ -206,9 +293,9 @@ def verify():
     conn.close()
 
     success_html = """
-    <h3 style='color:green; font-size:16px; font-weight:900;'>✅ PAYMENT VERIFIED! ACCESS MIL GAYA!</h3>
-    <p style='font-size:14px; font-weight:900;'>💋 WATCH VIDEO 💋</p>
-    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00d4ff; text-decoration:none; font-weight:900; font-size:14px;'>⚡️ JOIN CHANNEL</a>
+    <h3 style='color:#32cd32; font-size:16px; font-weight:900;'>✅ PAYMENT VERIFIED! ACCESS MIL GAYA!</h3>
+    <p style='font-size:14px; font-weight:900; color:white;'>💋 WATCH VIDEO 💋</p>
+    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00ffff; text-decoration:none; font-weight:900; font-size:14px;'>⚡️ JOIN CHANNEL</a>
     """
     return {"success": True, "html": success_html, "new_wallet": total_wallet}
 
