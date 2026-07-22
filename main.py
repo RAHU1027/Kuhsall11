@@ -1,52 +1,56 @@
-from flask import Flask, render_template_string, request, redirect
-import stripe, sqlite3
+from flask import Flask, render_template_string, request, redirect, session
+import sqlite3, re, uuid
 
 app = Flask(__name__)
-
-# Stripe Secret Key configure ki gayi hai
-stripe.api_key = "sk_test_51TvhWHDx1KUbUr9R50C0iRfzQh5HJ4tTbOM5cSoG0UjDWKHkfKKuJ05qexY9YTyureRbGNh7l10h53tiqvmzteiw00cFJ6FEsW"
+app.secret_key = 'super_secret_admin_key_change_this'
 
 def init_db():
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS transactions 
-                 (tid TEXT PRIMARY KEY, amount INTEGER)''')
+                 (tid TEXT PRIMARY KEY, amount INTEGER, status TEXT DEFAULT 'COMPLETED')''')
+    c.execute('''CREATE TABLE IF NOT EXISTS settings 
+                 (key TEXT PRIMARY KEY, value TEXT)''')
+    c.execute("INSERT OR IGNORE INTO settings VALUES ('qr_code', '/static/qr.jpg')")
     conn.commit()
     conn.close()
 init_db()
 
 content = [
     {
-        "title": "80000+ ZIP FILE'S CHANNEL",
-        "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily", 
+        "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
         "media_type": "img",
         "media": "/static/1.jpg", 
         "price_val": 799,
-        "price": "Rs. 799.00"
+        "price": "Rs. 799.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
     },
     {
-        "title": "50K+ MMS LEAK PACK",
-        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹120/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE", 
+        "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹120/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
         "media_type": "video",
         "media": "/static/1.mp4", 
         "price_val": 120,
-        "price": "Rs. 120.00"
+        "price": "Rs. 120.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
     },
     {
-        "title": "VIP STUFF AVAILABLE",
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/3.jpg", 
         "price_val": 69,
-        "price": "Rs. 69.00"
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 199.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
     },
     {
-        "title": "PREMIUM DESI MAAL",
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "video",
         "media": "/static/2.mp4", 
         "price_val": 99,
-        "price": "Rs. 99.00"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 499.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+    },
+    {
+        "text": "🔞 <b>PREMIUM DESI MAAL 2</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
+        "media_type": "img",
+        "media": "/static/2.jpg", 
+        "price_val": 99,
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
     }
 ]
 
@@ -57,13 +61,13 @@ HTML = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @keyframes borderGlow {
-            0% { border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-            50% { border-color: rgba(255, 235, 59, 0.5); box-shadow: 0 0 20px rgba(255, 235, 59, 0.2); }
-            100% { border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+            0% { border-color: rgba(255, 255, 255, 0.05); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+            50% { border-color: rgba(255, 235, 59, 0.6); box-shadow: 0 0 25px rgba(255, 235, 59, 0.3); }
+            100% { border-color: rgba(255, 255, 255, 0.05); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
         }
 
         body { 
-            background: #050505; 
+            background: #000000; 
             color: #fff; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0; 
@@ -92,7 +96,8 @@ HTML = """
         .nav-btn:hover { background: rgba(255,235,59,0.15); color: #ffeb3b; border-color: #ffeb3b; }
 
         .card { 
-            background: #111111; 
+            background: #0d0d0d; 
+            backdrop-filter: blur(10px); 
             padding: 15px; 
             margin: 15px auto; 
             width: 90%; 
@@ -103,28 +108,35 @@ HTML = """
         }
 
         .card p { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.5; color: #d0d0d0; }
-        
-        .btn-demo { background: #222; color: #ffeb3b; width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid rgba(255,235,59,0.3); border-radius: 8px; font-weight: 900; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
-        .btn-demo:hover { background: #333; }
+        .card b { font-size: 16px; letter-spacing: 1px; color: #fff; }
+
+        .btn-demo { background: #1a1a1a; color: #ffeb3b; width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid rgba(255,235,59,0.3); border-radius: 8px; font-weight: 900; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
+        .btn-demo:hover { background: #252525; transform: scale(1.01); }
 
         .btn-buy { background: linear-gradient(45deg, #28a745, #20c997); color: white; width: 100%; padding: 10px; border: none; border-radius: 8px; font-weight: 900; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
         .btn-buy:hover { opacity: 0.9; transform: scale(1.01); }
 
-        .menu { display: none; position: absolute; top: 45px; left: 10px; background: #141414; border-radius: 10px; padding: 10px; border: 1px solid rgba(255,255,255,0.15); width: 140px; z-index: 1001; box-shadow: 0 5px 20px rgba(0,0,0,0.9); font-size: 11px; font-weight: 800; color: white; }
+        .popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; }
+        .box { background: #111111; padding: 20px; border-radius: 15px; width: 85%; border: 1px solid rgba(255,235,59,0.3); text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.9); animation: borderGlow 3s infinite; }
+        .box h3 { font-size: 16px; font-weight: 900; letter-spacing: 1px; color: #fff; }
+        .back-btn { position: absolute; top: 10px; right: 10px; color: #ffcccc; cursor: pointer; font-weight: 900; font-size: 11px; letter-spacing: 1px; }
+
+        .menu { display: none; position: absolute; top: 45px; left: 10px; background: #111; border-radius: 10px; padding: 10px; border: 1px solid rgba(255,255,255,0.15); width: 140px; z-index: 1001; box-shadow: 0 5px 20px rgba(0,0,0,0.9); font-size: 11px; font-weight: 800; color: white; }
         .menu div:hover { color: #ffeb3b; background: rgba(255,255,255,0.05); border-radius: 5px; }
 
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); z-index: 1000; box-sizing: border-box; }
         .nav-item { text-align: center; color: #777; cursor: pointer; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-decoration: none; transition: 0.3s; }
-        .nav-item.active { color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.4); }
+        .nav-item.active { color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.5); }
         .nav-item div { font-size: 18px; margin-bottom: 2px; }
 
         .float-admin { position: fixed; bottom: 70px; right: 20px; background: #0088cc; color: white; padding: 10px 18px; border-radius: 25px; font-size: 11px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 15px rgba(0,136,204,0.4); z-index: 999; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
-        
+        .float-admin:hover { transform: scale(1.05); }
+
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        .store-title { text-align: center; font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 20px 0; color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.2); }
-        .review-card, .profile-card { background: #111; border: 1px solid rgba(255,255,255,0.08); width: 90%; margin: 15px auto; padding: 15px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.6); }
+        .store-title { text-align: center; font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 20px 0; color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.3); }
+        .review-card, .profile-card { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.08); width: 90%; margin: 15px auto; padding: 15px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.6); animation: borderGlow 5s infinite; }
     </style>
 </head>
 <body>
@@ -134,11 +146,11 @@ HTML = """
             <div class="nav-btn" onclick="toggleMenu(event)">⚙️ SETTINGS</div>
             <div id="m" class="menu">
                 <div style="padding:8px; cursor:pointer;" onclick="switchPage('profile', document.querySelectorAll('.nav-item')[2]); closeMenu();">👤 PROFILE</div>
-                <div style="padding:8px; cursor:pointer;" onclick="startCheckout(100); closeMenu();">💳 ADD FUNDS</div>
+                <div style="padding:8px; cursor:pointer;" onclick="showPopup(0); closeMenu();">💳 ADD FUNDS</div>
                 <div style="padding:8px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166', '_blank'); closeMenu();">🎧 SUPPORT</div>
             </div>
         </div>
-        <div class="nav-btn" style="border-color:#ffeb3b; color:#ffeb3b;">💰 WALLET: ₹{{ total_wallet }}</div>
+        <div class="nav-btn" style="border-color:#ffeb3b; color:#ffeb3b;" id="wallet-display">💰 WALLET: ₹{{ total_wallet }}</div>
     </div>
 
     <a href="https://t.me/Skjsbsh166" target="_blank" class="float-admin">✈️ Contact Admin</a>
@@ -156,9 +168,9 @@ HTML = """
                 <img src="{{ i.media }}" style="width:100%; border-radius:10px;">
             {% endif %}
             <p>{{ i.text|safe }}</p>
-            <p style="color:#ffeb3b; font-weight:900; font-size:14px;">PRICE: {{ i.price }}</p>
+            <p style="color:#ffeb3b; font-weight:900; font-size:14px;">PRICE: {{ i.price|safe }}</p>
             <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
-            <button class="btn-buy" onclick="startCheckout('{{ i.price_val }}')">UNLOCK PREMIUM</button>
+            <button class="btn-buy" onclick="showPopup('{{ i.price_val }}')">UNLOCK PREMIUM</button>
         </div>
         {% endfor %}
     </div>
@@ -173,7 +185,7 @@ HTML = """
         </div>
         <div class="review-card">
             <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified</span></div>
-            <p style="font-size:13px; margin:10px 0;">"Instant automatic access mil gaya payment hote hi. Best store!"</p>
+            <p style="font-size:13px; margin:10px 0;">"120 rs mein sabse best mms collection mila yaar, maza aa gaya."</p>
             <div style="font-size:10px; color:#ffeb3b;">📦 50K+ MMS LEAK PACK</div>
         </div>
     </div>
@@ -182,16 +194,37 @@ HTML = """
     <div id="page-profile" class="page-section">
         <div class="store-title">✨ MY PROFILE</div>
         <div class="profile-card" style="text-align:center;">
-            <div style="font-size:45px; margin-bottom:10px;">👑</div>
-            <div style="font-size:18px; font-weight:900; color:#ffeb3b;">VIP MEMBER</div>
-            <div style="display:inline-block; background:rgba(255,235,59,0.1); padding:6px 15px; border-radius:20px; font-size:11px; margin-top:10px; border:1px solid rgba(255,235,59,0.3); color:#fff;">Status: Active</div>
+            <div style="font-size:50px; margin-bottom:5px;">🥷</div>
+            <div style="font-size:18px; font-weight:900; color:#ffeb3b;">USER ACCOUNT</div>
+            <div style="font-size:11px; color:#aaa; margin-top:5px; letter-spacing:1px;">USER ID: <span style="color:#fff;">{{ user_id }}</span></div>
+            <div style="display:inline-block; background:rgba(255,235,59,0.1); padding:4px 12px; border-radius:20px; font-size:10px; margin-top:8px; border:1px solid rgba(255,235,59,0.3); color:#ffeb3b;">VIP MEMBER</div>
         </div>
+        
+        <!-- Order Stats Section -->
+        <div class="profile-card">
+            <div style="font-size:12px; font-weight:900; color:#ffeb3b; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">📊 ORDER STATISTICS</div>
+            <div style="display: flex; justify-content: space-between; text-align: center;">
+                <div>
+                    <div style="font-size:10px; color:#888;">TOTAL ORDERS</div>
+                    <div style="font-size:16px; font-weight:900; color:#fff; margin-top:2px;">{{ total_orders }}</div>
+                </div>
+                <div>
+                    <div style="font-size:10px; color:#888;">COMPLETED</div>
+                    <div style="font-size:16px; font-weight:900; color:#28a745; margin-top:2px;">{{ completed_orders }}</div>
+                </div>
+                <div>
+                    <div style="font-size:10px; color:#888;">PENDING</div>
+                    <div style="font-size:16px; font-weight:900; color:#ffc107; margin-top:2px;">0</div>
+                </div>
+            </div>
+        </div>
+
         <div class="profile-card" style="display:flex; justify-content:space-between; align-items:center;">
             <div>
                 <div style="font-size:11px; color:#777;">WALLET BALANCE</div>
-                <div style="font-size:18px; font-weight:900; color:#ffeb3b; margin-top:3px;">₹{{ total_wallet }}</div>
+                <div style="font-size:18px; font-weight:900; color:#ffeb3b; margin-top:3px;" id="profile-wallet">₹{{ total_wallet }}</div>
             </div>
-            <button class="nav-btn" onclick="startCheckout(100)" style="background:#28a745; border:none;">ADD FUNDS</button>
+            <button class="nav-btn" onclick="showPopup(0)" style="background:#28a745; border:none;">ADD FUNDS</button>
         </div>
     </div>
 
@@ -202,7 +235,21 @@ HTML = """
         <div class="nav-item" onclick="switchPage('profile', this)"><div>👤</div> Profile</div>
     </div>
 
+    <div id="p" class="popup">
+        <div class="box" id="content-box">
+            <div class="back-btn" onclick="closePopup()">BACK TO HOME</div>
+            <h3>PAY & ADD DETAILS ✍️</h3>
+            <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
+            <img src="{{ qr_code }}" style="width:100%; background:white; padding:5px; border-radius:5px;">
+            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+            <button class="btn-buy" onclick="verify()">SUBMIT DETAILS</button>
+        </div>
+    </div>
+
     <script>
+        let timerInterval;
+        let currentPrice = 0;
+        
         function switchPage(pageId, element) {
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -220,18 +267,36 @@ HTML = """
         function closeMenu() { document.getElementById('m').style.display = 'none'; }
         window.onclick = function() { closeMenu(); }
 
-        function startCheckout(amount) {
-            fetch('/create-checkout-session', {
+        function showPopup(price) { 
+            currentPrice = price;
+            document.getElementById('p').style.display = 'flex'; 
+            startTimer(240); 
+        }
+        function closePopup() { document.getElementById('p').style.display = 'none'; clearInterval(timerInterval); }
+        function startTimer(duration) {
+            clearInterval(timerInterval);
+            let timer = duration, m, s;
+            timerInterval = setInterval(function () {
+                m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
+                document.getElementById('timer').textContent = "0" + m + ":" + (s < 10 ? "0" + s : s);
+                if (--timer < 0) { closePopup(); }
+            }, 1000);
+        }
+        function verify() {
+            let tid = document.getElementById('tid').value;
+            fetch('/verify', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'amount=' + amount
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.url) {
-                    window.location.href = data.url;
+                body: 'tid=' + tid + '&amount=' + currentPrice
+            }).then(r => r.json()).then(data => {
+                if(data.success) {
+                    clearInterval(timerInterval);
+                    document.getElementById('content-box').innerHTML = data.html;
+                    document.getElementById('wallet-display').textContent = "💰 WALLET: ₹" + data.new_wallet;
+                    let profileWallet = document.getElementById('profile-wallet');
+                    if(profileWallet) profileWallet.textContent = "₹" + data.new_wallet;
                 } else {
-                    alert("Error creating payment session");
+                    alert(data.message);
                 }
             });
         }
@@ -242,59 +307,81 @@ HTML = """
 
 @app.route('/')
 def home():
+    if 'user_id' not in session:
+        session['user_id'] = "UID_" + uuid.uuid4().hex[:8].upper()
+
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
     c.execute("SELECT SUM(amount) FROM transactions")
     res = c.fetchone()[0]
     total_wallet = res if res else 0
+    
+    c.execute("SELECT COUNT(*), SUM(CASE WHEN status='COMPLETED' THEN 1 ELSE 0 END) FROM transactions")
+    order_data = c.fetchone()
+    total_orders = order_data[0] if order_data[0] else 0
+    completed_orders = order_data[1] if order_data[1] else 0
+
+    c.execute("SELECT value FROM settings WHERE key='qr_code'")
+    qr_row = c.fetchone()
+    qr_code = qr_row[0] if qr_row else '/static/qr.jpg'
     conn.close()
-    return render_template_string(HTML, content=content, total_wallet=total_wallet)
 
-@app.route('/create-checkout-session', methods=['POST'])
-def create_checkout_session():
+    return render_template_string(HTML, content=content, total_wallet=total_wallet, qr_code=qr_code, user_id=session['user_id'], total_orders=total_orders, completed_orders=completed_orders)
+
+@app.route('/verify', methods=['POST'])
+def verify():
+    tid = request.form.get('tid', '').strip()
     try:
-        amount = int(request.form.get('amount', 100))
+        amount = int(request.form.get('amount', '0'))
     except ValueError:
-        amount = 100
+        amount = 0
 
-    try:
-        # Stripe automated checkout session create karega
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[{
-                'price_data': {
-                    'currency': 'inr',
-                    'product_data': {'name': 'VIP Store Credit / Premium Access'},
-                    'unit_amount': amount * 100, # Stripe takes amount in paisa
-                },
-                'quantity': 1,
-            }],
-            mode='payment',
-            success_url=request.host_url + 'success?amount=' + str(amount),
-            cancel_url=request.host_url + '',
-        )
-        return {"url": checkout_session.url}
-    except Exception as e:
-        return {"error": str(e)}, 400
-
-@app.route('/success')
-def success():
-    amount = request.args.get('amount', '100')
-    try:
-        amt_val = int(amount)
-    except:
-        amt_val = 100
-
-    # Payment successful hone par database mein automatically add ho jayega
+    if not re.match(r'^\d{12}$', tid):
+        return {"success": False, "message": "❌ INVALID TID! MUST BE 12 DIGITS."}
+    
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
-    import uuid
-    dummy_tid = "STRIPE_" + uuid.uuid4().hex[:8].upper()
-    c.execute("INSERT OR IGNORE INTO transactions VALUES (?, ?)", (dummy_tid, amt_val))
+    c.execute("SELECT * FROM transactions WHERE tid=?", (tid,))
+    if c.fetchone():
+        conn.close()
+        return {"success": False, "message": "❌ TID ALREADY USED!"}
+    
+    c.execute("INSERT INTO transactions (tid, amount, status) VALUES (?, ?, ?)", (tid, amount, 'COMPLETED'))
     conn.commit()
+
+    c.execute("SELECT SUM(amount) FROM transactions")
+    res = c.fetchone()[0]
+    total_wallet = res if res else 0
     conn.close()
 
-    return redirect('/')
+    success_html = """
+    <h3 style='color:#32cd32; font-size:16px; font-weight:900;'>✅ PAYMENT VERIFIED! ACCESS MIL GAYA!</h3>
+    <p style='font-size:14px; font-weight:900; color:white;'>💋 WATCH VIDEO 💋</p>
+    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00ffff; text-decoration:none; font-weight:900; font-size:14px;'>⚡️ JOIN CHANNEL</a>
+    """
+    return {"success": True, "html": success_html, "new_wallet": total_wallet}
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        new_qr = request.form.get('qr_code')
+        if new_qr:
+            conn = sqlite3.connect('payments.db')
+            c = conn.cursor()
+            c.execute("UPDATE settings SET value=? WHERE key='qr_code'", (new_qr,))
+            conn.commit()
+            conn.close()
+        return redirect('/admin')
+    
+    conn = sqlite3.connect('payments.db')
+    c = conn.cursor()
+    c.execute("SELECT value FROM settings WHERE key='qr_code'")
+    qr_row = c.fetchone()
+    current_qr = qr_row[0] if qr_row else '/static/qr.jpg'
+    
+    c.execute("SELECT tid, amount, status FROM transactions")
+    txs = c.fetchall()
+    conn.close()
+
+    admin_html = f"""
+    <body style="background:#111; color:#fff; f
