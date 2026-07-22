@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, session
+from flask import Flask, render_template_string, request, session, jsonify
 import sqlite3, re, uuid, os
 
 app = Flask(__name__)
@@ -366,5 +366,4 @@ def home():
     order_data = c.fetchone()
     total_orders = order_data[0] if order_data[0] else 0
     completed_orders = order_data[1] if order_data[1] else 0
-    conn.close()
-
+    conn
