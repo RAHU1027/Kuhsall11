@@ -326,5 +326,10 @@ def home():
 
     return render_template_string(HTML, content=content, total_wallet=total_wallet, total_orders=total_orders, completed_orders=completed_orders, user_id=session['user_id'])
 
+# UptimeRobot ke liye 24/7 active rakhne wala ping route
+@app.route('/ping')
+def ping():
+    return "OK", 200
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
