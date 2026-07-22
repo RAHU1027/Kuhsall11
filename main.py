@@ -385,4 +385,4 @@ def admin():
 
     rows_html = ""
     for t in txs:
-        rows_html += f"<tr><td>{
+        rows_html += "<tr><td>" 
