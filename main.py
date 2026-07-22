@@ -383,5 +383,6 @@ def admin():
     txs = c.fetchall()
     conn.close()
 
-    admin_html = f"""
-    <body style="background:#111; color:#fff; f
+    rows_html = ""
+    for t in txs:
+        rows_html += f"<tr><td>{
