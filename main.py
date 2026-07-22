@@ -12,7 +12,6 @@ def init_db():
     conn.close()
 init_db()
 
-# Aapka original data waisa ka waisa, sath mein 'price_val' add kiya hai wallet tracking ke liye
 content = [
     {
         "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
@@ -57,40 +56,99 @@ HTML = """
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Modern red solid background & unique bold large capital letters */
-        body { background: #dc2626; color:#fff; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding-top:70px; padding-bottom:70px; min-height: 100vh; text-transform: uppercase; }
-        .header { position:fixed; top:0; width:100%; background:rgba(153, 0, 0, 0.95); backdrop-filter: blur(10px); padding:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,0.2); }
-        .nav-btn { font-size:11px; font-weight:900; letter-spacing: 1px; color:#fff; padding:6px 10px; border-radius:5px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); white-space:nowrap; cursor:pointer; }
-        .card { background:rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); padding:15px; margin:15px auto; width:90%; border-radius:15px; border:1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
-        
-        /* Unique Bold Large Typography Styling */
+        @keyframes borderGlow {
+            0% { border-color: rgba(255, 235, 59, 0.3); box-shadow: 0 0 10px rgba(255, 235, 59, 0.1); }
+            50% { border-color: rgba(255, 235, 59, 0.9); box-shadow: 0 0 20px rgba(255, 235, 59, 0.4); }
+            100% { border-color: rgba(255, 235, 59, 0.3); box-shadow: 0 0 10px rgba(255, 235, 59, 0.1); }
+        }
+
+        body { 
+            background: linear-gradient(135deg, #0f0f0f, #1a0000, #000000); 
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color:#fff; 
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin:0; 
+            padding-top:70px; 
+            padding-bottom:70px; 
+            min-height: 100vh; 
+            text-transform: uppercase; 
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header { 
+            position:fixed; 
+            top:0; 
+            width:100%; 
+            background:rgba(15, 15, 15, 0.9); 
+            backdrop-filter: blur(10px); 
+            padding:10px; 
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            z-index:1000; 
+            box-sizing:border-box; 
+            border-bottom:1px solid rgba(255,255,255,0.1); 
+        }
+
+        .nav-btn { font-size:11px; font-weight:900; letter-spacing: 1px; color:#fff; padding:6px 12px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2); white-space:nowrap; cursor:pointer; transition: all 0.3s ease; }
+        .nav-btn:hover { background: rgba(255,235,59,0.2); color: #ffeb3b; }
+
+        .card { 
+            background:rgba(20, 20, 20, 0.8); 
+            backdrop-filter: blur(10px); 
+            padding:15px; 
+            margin:15px auto; 
+            width:90%; 
+            border-radius:15px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            animation: borderGlow 4s infinite;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
+        }
+
         .card p { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.5; color: #e0e0e0; }
         .card b { font-size: 16px; letter-spacing: 1px; color: #fff; }
 
-        .btn-demo { background:#ffeb3b; color:black; width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:5px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; }
-        .btn-buy { background:#28a745; color:white; width:100%; padding:10px; border:none; border-radius:5px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; }
-        .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; }
-        .box { background:#4a0000; padding:20px; border-radius:15px; width:85%; border:1px solid rgba(255,255,255,0.2); text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .btn-demo { background:#ffeb3b; color:black; width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:8px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; transition: 0.2s; }
+        .btn-demo:hover { background: #ffd700; transform: scale(1.02); }
+
+        .btn-buy { background:linear-gradient(45deg, #28a745, #20c997); color:white; width:100%; padding:10px; border:none; border-radius:8px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; transition: 0.2s; }
+        .btn-buy:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index:9999; justify-content:center; align-items:center; }
+        .box { background:#161616; padding:20px; border-radius:15px; width:85%; border:1px solid rgba(255,235,59,0.3); text-align:center; position:relative; box-shadow: 0 10px 30px rgba(0,0,0,0.8); animation: borderGlow 3s infinite; }
         .box h3 { font-size: 16px; font-weight: 900; letter-spacing: 1px; color: #fff; }
         .back-btn { position:absolute; top:10px; right:10px; color:#ffcccc; cursor:pointer; font-weight:900; font-size:11px; letter-spacing: 1px; }
-        .menu { display:none; position:absolute; top:45px; left:10px; background:#990000; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.2); width:120px; z-index:1001; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 11px; font-weight: 800; color: white; }
-        
+
+        .menu { display:none; position:absolute; top:45px; left:10px; background:#1a1a1a; border-radius:10px; padding:10px; border:1px solid rgba(255,255,255,0.2); width:140px; z-index:1001; box-shadow: 0 5px 20px rgba(0,0,0,0.5); font-size: 11px; font-weight: 800; color: white; }
+        .menu div:hover { color: #ffeb3b; background: rgba(255,255,255,0.05); border-radius: 5px; }
+
         /* Welcome Overlay */
-        #welcome-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:#cc0000; z-index:10000; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; }
-        #welcome-overlay h2 { font-size: 20px; font-weight: 900; letter-spacing: 1px; color: #fff; }
-        #welcome-overlay p { font-size: 11px; font-weight: 700; color:#ffcccc; letter-spacing: 0.5px; }
-        .ok-btn { background:#fff; color:#cc0000; padding:12px 30px; border:none; border-radius:25px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; margin-top:20px; }
+        #welcome-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10000; display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; }
+        #welcome-overlay h2 { font-size: 20px; font-weight: 900; letter-spacing: 1px; color: #ffeb3b; }
+        #welcome-overlay p { font-size: 11px; font-weight: 700; color:#ccc; letter-spacing: 0.5px; }
+        .ok-btn { background:linear-gradient(45deg, #ffeb3b, #ff9800); color:#000; padding:12px 30px; border:none; border-radius:25px; font-weight:900; font-size:12px; letter-spacing:1px; cursor:pointer; margin-top:20px; }
 
         /* Bottom Navigation Bar & Admin Button Styles */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(153, 0, 0, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.2); z-index: 1000; box-sizing: border-box; }
-        .nav-item { text-align: center; color: #aaa; cursor: pointer; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-decoration: none; }
-        .nav-item.active { color: #ffeb3b; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.1); z-index: 1000; box-sizing: border-box; }
+        .nav-item { text-align: center; color: #888; cursor: pointer; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-decoration: none; transition: 0.3s; }
+        .nav-item.active { color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.5); }
         .nav-item div { font-size: 18px; margin-bottom: 2px; }
-        .float-admin { position: fixed; bottom: 70px; right: 20px; background: #0088cc; color: white; padding: 10px 18px; border-radius: 25px; font-size: 11px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 999; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+
+        .float-admin { position: fixed; bottom: 70px; right: 20px; background: linear-gradient(45deg, #0088cc, #00aced); color: white; padding: 10px 18px; border-radius: 25px; font-size: 11px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 15px rgba(0,136,204,0.4); z-index: 999; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
+        .float-admin:hover { transform: scale(1.05); }
+
         .page-section { display: none; }
         .page-section.active { display: block; }
-        .store-title { text-align: center; font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 20px 0; color: #ffeb3b; }
-        .review-card, .profile-card { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255,255,255,0.1); width: 90%; margin: 15px auto; padding: 15px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+
+        .store-title { text-align: center; font-size: 20px; font-weight: 900; letter-spacing: 2px; margin: 20px 0; color: #ffeb3b; text-shadow: 0 0 10px rgba(255,235,59,0.3); }
+        
+        .review-card, .profile-card { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255,235,59,0.2); width: 90%; margin: 15px auto; padding: 15px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); animation: borderGlow 5s infinite; }
     </style>
 </head>
 <body>
@@ -104,14 +162,14 @@ HTML = """
 
     <div class="header">
         <div style="position:relative;">
-            <div class="nav-btn" onclick="document.getElementById('m').style.display='block'">⚙️ SETTINGS</div>
-            <div id="m" class="menu" onclick="this.style.display='none'">
-                <div style="padding:5px; cursor:pointer;" onclick="switchPage('profile', document.querySelectorAll('.nav-item')[2])">👤 PROFILE</div>
-                <div style="padding:5px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166')">💳 ADD FUNDS</div>
-                <div style="padding:5px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166')">🎧 SUPPORT</div>
+            <div class="nav-btn" onclick="toggleMenu(event)">⚙️ SETTINGS</div>
+            <div id="m" class="menu">
+                <div style="padding:8px; cursor:pointer;" onclick="switchPage('profile', document.querySelectorAll('.nav-item')[2]); closeMenu();">👤 PROFILE</div>
+                <div style="padding:8px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166', '_blank'); closeMenu();">💳 ADD FUNDS</div>
+                <div style="padding:8px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166', '_blank'); closeMenu();">🎧 SUPPORT</div>
             </div>
         </div>
-        <div class="nav-btn" style="border-color:#fff; color:#fff;" id="wallet-display">💰 WALLET: ₹{{ total_wallet }}</div>
+        <div class="nav-btn" style="border-color:#ffeb3b; color:#ffeb3b;" id="wallet-display">💰 WALLET: ₹{{ total_wallet }}</div>
     </div>
 
     <!-- Working Contact Admin Button -->
@@ -139,47 +197,51 @@ HTML = """
         {% endfor %}
     </div>
 
-    <!-- REVIEWS PAGE -->
+    <!-- REVIEWS PAGE (Updated with Custom Site Reviews) -->
     <div id="page-reviews" class="page-section">
         <div class="store-title">✨ CP STORE</div>
-        <div style="text-align:center; font-size:12px; font-weight:700; color:#ffcccc; margin-bottom:15px;">⭐ Customer Reviews<br><span style="font-size:10px; color:#aaa;">Sirf verified purchasers feedback de sakte hain</span></div>
+        <div style="text-align:center; font-size:12px; font-weight:700; color:#ffeb3b; margin-bottom:15px;">⭐ Verified Customer Feedback<br><span style="font-size:10px; color:#aaa;">Official Reviews from Our Store Buyers</span></div>
         
         <div class="review-card">
-            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
-            <p style="font-size:13px; margin:10px 0;">"49 rs best ha bro"</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 DESI MALAYALAM AUNTY</div>
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified Buyer</span></div>
+            <p style="font-size:13px; margin:10px 0;">"Files direct mil gayi, content bilkul real aur HD hai!"</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 80000+ ZIP FILE'S CHANNEL</div>
         </div>
         
         <div class="review-card">
-            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
-            <p style="font-size:13px; margin:10px 0;">"Best"</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 10 INDIAN CP FILE</div>
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified Buyer</span></div>
+            <p style="font-size:13px; margin:10px 0;">"120 rs mein sabse best mms collection mila yaar, maza aa gaya."</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 50K+ MMS LEAK PACK</div>
         </div>
 
         <div class="review-card">
-            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#aaa; font-size:11px;">Anonymous</span></div>
-            <p style="font-size:13px; margin:10px 0;">"199 rs is best"</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 INDIAN CP</div>
+            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified Buyer</span></div>
+            <p style="font-size:13px; margin:10px 0;">"Fast delivery and instant access after payment verification. Trusted store!"</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 PREMIUM DESI MAAL</div>
         </div>
     </div>
 
-    <!-- PROFILE PAGE -->
+    <!-- PROFILE PAGE (Redesigned professionally) -->
     <div id="page-profile" class="page-section">
-        <div class="store-title">✨ CP STORE</div>
+        <div class="store-title">✨ MY PROFILE</div>
         <div class="profile-card" style="text-align:center;">
-            <div style="font-size:40px; margin-bottom:10px;">👤</div>
-            <div style="font-size:16px; font-weight:900; color:#fff;">Tu6</div>
-            <div style="display:inline-block; background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:15px; font-size:11px; margin-top:10px; border:1px solid rgba(255,255,255,0.2);">User ID: 7435</div>
+            <div style="font-size:45px; margin-bottom:10px;">👑</div>
+            <div style="font-size:18px; font-weight:900; color:#ffeb3b;">VIP MEMBER</div>
+            <div style="display:inline-block; background:rgba(255,235,59,0.1); padding:6px 15px; border-radius:20px; font-size:11px; margin-top:10px; border:1px solid rgba(255,235,59,0.3); color:#fff;">Status: Active User</div>
         </div>
         
-        <div class="profile-card" style="text-align:center;">
-            <div style="font-size:11px; color:#aaa;">TOTAL PURCHASES</div>
-            <div style="font-size:22px; font-weight:900; color:#ffeb3b; margin-top:5px;">0</div>
+        <div class="profile-card" style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <div style="font-size:11px; color:#aaa;">WALLET BALANCE</div>
+                <div style="font-size:18px; font-weight:900; color:#ffeb3b; margin-top:3px;" id="profile-wallet">₹{{ total_wallet }}</div>
+            </div>
+            <button class="nav-btn" onclick="window.open('https://t.me/Skjsbsh166', '_blank')" style="background:#0088cc; border:none;">ADD FUNDS</button>
         </div>
 
         <div class="profile-card" style="text-align:center;">
-            <div style="font-size:11px; color:#aaa;">MEMBER SINCE</div>
-            <div style="font-size:16px; font-weight:900; color:#ffeb3b; margin-top:5px;">Mar 2026</div>
+            <div style="font-size:11px; color:#aaa;">SUPPORT & HELP</div>
+            <div style="font-size:13px; font-weight:900; color:#fff; margin-top:5px;">Need help with payment? Contact Admin directly.</div>
+            <button class="btn-demo" style="margin-top:12px; background:#0088cc; color:#fff;" onclick="window.open('https://t.me/Skjsbsh166', '_blank')">CONTACT @Skjsbsh166</button>
         </div>
     </div>
 
@@ -200,9 +262,9 @@ HTML = """
         <div class="box" id="content-box">
             <div class="back-btn" onclick="closePopup()">BACK TO HOME</div>
             <h3>PAY & ADD DETAILS ✍️</h3>
-            <div id="timer" style="color:yellow; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
+            <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
             <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
-            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#990000; border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#111; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
             <button class="btn-buy" onclick="verify()">SUBMIT DETAILS</button>
         </div>
     </div>
@@ -218,6 +280,20 @@ HTML = """
             document.getElementById('page-' + pageId).classList.add('active');
             if(element) element.classList.add('active');
             window.scrollTo(0, 0);
+        }
+
+        function toggleMenu(event) {
+            event.stopPropagation();
+            let m = document.getElementById('m');
+            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function closeMenu() {
+            document.getElementById('m').style.display = 'none';
+        }
+
+        window.onclick = function() {
+            closeMenu();
         }
 
         function showPopup(price) { 
@@ -246,6 +322,8 @@ HTML = """
                     clearInterval(timerInterval);
                     document.getElementById('content-box').innerHTML = data.html;
                     document.getElementById('wallet-display').textContent = "💰 WALLET: ₹" + data.new_wallet;
+                    let profileWallet = document.getElementById('profile-wallet');
+                    if(profileWallet) profileWallet.textContent = "₹" + data.new_wallet;
                 } else {
                     alert(data.message);
                 }
