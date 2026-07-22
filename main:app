@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, session
+from flask import Flask, render_template_string, request, session, jsonify
 import sqlite3, uuid, os
 
 app = Flask(__name__)
@@ -65,6 +65,14 @@ content = [
         "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>",
         "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     }
+]
+
+reviews_list = [
+    {"user": "Rahul Sharma", "text": "Bhai 80K zip files wala channel join kiya, ekdum next level content hai. Daily naye updates mil rahe hain!", "item": "80000+ ZIP FILE'S CHANNEL", "time": "2 hours ago"},
+    {"user": "Aman Verma", "text": "Sirf 120 rupay me 50K+ MMS leak pack mil gaya, link turant open ho gayi thi. Bahut badiya!", "item": "50K+ MMS LEAK PACK", "time": "5 hours ago"},
+    {"user": "Vicky Malhotra", "text": "VIP stuff available wala pack sach me tagda hai. Paisa vasool item hai bhai ka!", "item": "VIP STUFF AVAILABLE", "time": "1 day ago"},
+    {"user": "Rohit Singh", "text": "Desi maal collection ekdum HD quality me hai. Maza aa gaya dekh kar, sabhi ko lena chahiye.", "item": "PREMIUM DESI MAAL", "time": "Yesterday"},
+    {"user": "Deepak Kumar", "text": "Wallet me paise add karke turant unlock kar liya. Trusted seller hai 100%!", "item": "PREMIUM DESI MAAL 2", "time": "2 days ago"}
 ]
 
 HTML = """
@@ -190,12 +198,13 @@ HTML = """
 
     <!-- REVIEWS PAGE -->
     <div id="page-reviews" class="page-section">
-        <div class="store-title">✨ REVIEWS</div>
-        {% for i in content %}
+        <div class="store-title">✨ USER REVIEWS</div>
+        {% for r in reviews_list %}
         <div class="review-card">
-            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified</span></div>
-            <p style="font-size:13px; margin:10px 0;">"Files direct mil gayi, content bilkul real aur HD hai! Maza aa gaya."</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 {{ i.title }}</div>
+            <div style="font-size:13px; font-weight:900; color:#ffeb3b; margin-bottom:5px;">👤 {{ r.user }} <span style="font-size:9px; color:#888; float:right;">{{ r.time }}</span></div>
+            <div style="color:gold; font-size:13px; margin-bottom:5px;">★★★★★ <span style="float:right; color:#28a745; font-size:10px; border:1px solid #28a745; padding:1px 5px; border-radius:4px;">VERIFIED BUYER</span></div>
+            <p style="font-size:12px; margin:8px 0; color:#ddd;">"{{ r.text }}"</p>
+            <div style="font-size:10px; color:#ffeb3b; border-top:1px solid rgba(255,255,255,0.05); padding-top:5px; margin-top:5px;">📦 PURCHASED: {{ r.item }}</div>
         </div>
         {% endfor %}
     </div>
@@ -252,8 +261,9 @@ HTML = """
                 <h3>PAY & ADD FUNDS ✍️</h3>
                 <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
                 <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
-                <p style="font-size:11px; color:#aaa; margin:10px 0;">Contact admin after payment to add funds.</p>
-                <button class="btn-buy" onclick="window.open('https://t.me/Skjsbsh166', '_blank')">CONTACT ADMIN</button>
+                <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+                <input id="add-amount" type="number" placeholder="ENTER AMOUNT PAID (E.G. 200)" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center;"><br>
+                <button class="btn-buy" onclick="verifyAddFunds()">SUBMIT PAYMENT</button>
             </div>
         </div>
     </div>
@@ -283,8 +293,9 @@ HTML = """
                 <h3>PAY & ADD FUNDS ✍️</h3>
                 <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
                 <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
-                <p style="font-size:11px; color:#aaa; margin:10px 0;">Contact admin after payment to add funds.</p>
-                <button class="btn-buy" onclick="window.open('https://t.me/Skjsbsh166', '_blank')">CONTACT ADMIN</button>
+                <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+                <input id="add-amount" type="number" placeholder="ENTER AMOUNT PAID (E.G. 200)" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center;"><br>
+                <button class="btn-buy" onclick="verifyAddFunds()">SUBMIT PAYMENT</button>
             `;
             document.getElementById('p').style.display = 'flex';
             startTimer(240);
@@ -302,34 +313,25 @@ HTML = """
                 if (--timer < 0) { closePopup(); }
             }, 1000);
         }
-    </script>
-</body>
-</html>
-"""
 
-@app.route('/')
-def home():
-    if 'user_id' not in session:
-        session['user_id'] = "UID_" + uuid.uuid4().hex[:8].upper()
-
-    conn = sqlite3.connect('payments.db')
-    c = conn.cursor()
-    c.execute("SELECT SUM(amount) FROM transactions")
-    res = c.fetchone()[0]
-    total_wallet = res if res else 0
-    
-    c.execute("SELECT COUNT(*), SUM(CASE WHEN status='COMPLETED' THEN 1 ELSE 0 END) FROM transactions")
-    order_data = c.fetchone()
-    total_orders = order_data[0] if order_data[0] else 0
-    completed_orders = order_data[1] if order_data[1] else 0
-    conn.close()
-
-    return render_template_string(HTML, content=content, total_wallet=total_wallet, total_orders=total_orders, completed_orders=completed_orders, user_id=session['user_id'])
-
-# UptimeRobot ke liye 24/7 active rakhne wala ping route
-@app.route('/ping')
-def ping():
-    return "OK", 200
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+        function verifyAddFunds() {
+            let tid = document.getElementById('tid').value;
+            let amount = document.getElementById('add-amount').value;
+            fetch('/verify_funds', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'tid=' + tid + '&amount=' + amount
+            }).then(r => r.json()).then(data => {
+                if(data.success) {
+                    clearInterval(timerInterval);
+                    document.getElementById('popup-inner').innerHTML = `<h3 style='color:#32cd32;'>✅ FUNDS ADDED SUCCESSFULLY!</h3><p style='color:white; font-weight:bold;'>New Balance: ₹` + data.new_wallet + `</p><button class="btn-buy" onclick="closePopup()">CONTINUE SHOPPING</button>`;
+                    let walletEl = document.getElementById('wallet-display');
+                    if(walletEl) walletEl.textContent = "💰 WALLET: ₹" + data.new_wallet;
+                    let profileWallet = document.getElementById('profile-wallet');
+                    if(profileWallet) profileWallet.textContent = "₹" + data.new_wallet;
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    </script
