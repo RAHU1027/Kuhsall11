@@ -7,6 +7,7 @@ app.secret_key = 'super_secret_store_key_change_this'
 def init_db():
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
+    # Transactions table mein hum 'type' ya status manage kar sakte hain
     c.execute('''CREATE TABLE IF NOT EXISTS transactions 
                  (tid TEXT PRIMARY KEY, amount INTEGER, status TEXT DEFAULT 'COMPLETED')''')
     conn.commit()
@@ -15,39 +16,54 @@ init_db()
 
 content = [
     {
+        "id": 1,
+        "title": "80000+ ZIP FILE'S CHANNEL",
         "text": "😍 <b>80000+ zip file's Channel</b> 💔<br>━━━━━━━━━━━━━━━━━━━━<br>Benefits:<br>• 📁 All Dark Zip Files Available<br>• 🆕 New Files Added Daily<br>• 🔄 Forwarding Files is Allowed<br><br>🤔 Want to Buy?<br>🚀 Offers Are Live Now!", 
         "media_type": "img",
         "media": "/static/1.jpg", 
         "price_val": 799,
-        "price": "Rs. 799.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>"
+        "price": "Rs. 799.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 3,999.00</span><br><span style='color:red;'>🔥 174 people bought this</span>",
+        "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     },
     {
+        "id": 2,
+        "title": "50K+ MMS LEAK PACK",
         "text": "🔞 <b>50K+ MMS LEAK IN JUST ₹120/-</b> 💦<br>━━━━━━━━━━━━━━━━━━━━<br>🔥 ALL TYPE AVAILABLE<br>✨ 90% OFF SALE<br>👇 CLICK SHOP NOW 👇", 
         "media_type": "video",
         "media": "/static/1.mp4", 
         "price_val": 120,
-        "price": "Rs. 120.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>"
+        "price": "Rs. 120.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 249.00</span><br><span style='color:red;'>🔥 450+ people bought this</span>",
+        "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     },
     {
+        "id": 3,
+        "title": "VIP STUFF AVAILABLE",
         "text": "🥷 <b>VIP STUFF AVAILABLE</b> 🇨🇦<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/3.jpg", 
         "price_val": 69,
-        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 199.00</span><br><span style='color:red;'>🔥 94 people bought this</span>"
+        "price": "Rs. 69.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 199.00</span><br><span style='color:red;'>🔥 94 people bought this</span>",
+        "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     },
     {
+        "id": 4,
+        "title": "PREMIUM DESI MAAL",
         "text": "🔞 <b>PREMIUM DESI MAAL</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "video",
         "media": "/static/2.mp4", 
         "price_val": 99,
-        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 499.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 499.00</span><br><span style='color:red;'>🔥 314 people bought this</span>",
+        "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     },
     {
+        "id": 5,
+        "title": "PREMIUM DESI MAAL 2",
         "text": "🔞 <b>PREMIUM DESI MAAL 2</b> 🍑<br>━━━━━━━━━━━━━━━━━━━━", 
         "media_type": "img",
         "media": "/static/2.jpg", 
         "price_val": 99,
-        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>"
+        "price": "Rs. 99.00 <span style='text-decoration:line-through; color:gray; font-size:12px;'>Rs. 399.00</span><br><span style='color:red;'>🔥 314 people bought this</span>",
+        "link": "https://t.me/+DVwN8sdnvDQ1YWE9"
     }
 ]
 
@@ -143,7 +159,7 @@ HTML = """
             <div class="nav-btn" onclick="toggleMenu(event)">⚙️ SETTINGS</div>
             <div id="m" class="menu">
                 <div style="padding:8px; cursor:pointer;" onclick="switchPage('profile', document.querySelectorAll('.nav-item')[2]); closeMenu();">👤 PROFILE</div>
-                <div style="padding:8px; cursor:pointer;" onclick="showPopup(0); closeMenu();">💳 ADD FUNDS</div>
+                <div style="padding:8px; cursor:pointer;" onclick="openAddFunds(); closeMenu();">💳 ADD FUNDS</div>
                 <div style="padding:8px; cursor:pointer;" onclick="window.open('https://t.me/Skjsbsh166', '_blank'); closeMenu();">🎧 SUPPORT</div>
             </div>
         </div>
@@ -154,7 +170,7 @@ HTML = """
 
     <!-- HOME PAGE -->
     <div id="page-home" class="page-section active">
-        <div class="store-title">✨ CP STORE</div>
+        <div class="store-title">✨ PREMIUM VIDEO</div>
         {% for i in content %}
         <div class="card">
             {% if i.media_type == 'video' %}
@@ -167,7 +183,7 @@ HTML = """
             <p>{{ i.text|safe }}</p>
             <p style="color:#ffeb3b; font-weight:900; font-size:14px;">PRICE: {{ i.price|safe }}</p>
             <button class="btn-demo" onclick="window.open('https://t.me/+JBVaDAvX-To1NzRl')">FREE DEMO</button>
-            <button class="btn-buy" onclick="showPopup('{{ i.price_val }}')">UNLOCK PREMIUM</button>
+            <button class="btn-buy" onclick="unlockItem('{{ i.id }}', '{{ i.price_val }}')">UNLOCK PREMIUM</button>
         </div>
         {% endfor %}
     </div>
@@ -175,16 +191,13 @@ HTML = """
     <!-- REVIEWS PAGE -->
     <div id="page-reviews" class="page-section">
         <div class="store-title">✨ REVIEWS</div>
+        {% for i in content %}
         <div class="review-card">
             <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified</span></div>
-            <p style="font-size:13px; margin:10px 0;">"Files direct mil gayi, content bilkul real aur HD hai!"</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 80000+ ZIP FILE'S CHANNEL</div>
+            <p style="font-size:13px; margin:10px 0;">"Files direct mil gayi, content bilkul real aur HD hai! Maza aa gaya."</p>
+            <div style="font-size:10px; color:#ffeb3b;">📦 {{ i.title }}</div>
         </div>
-        <div class="review-card">
-            <div style="color:gold; font-size:14px;">★★★★★ <span style="float:right; color:#ffeb3b; font-size:11px;">Verified</span></div>
-            <p style="font-size:13px; margin:10px 0;">"120 rs mein sabse best mms collection mila yaar, maza aa gaya."</p>
-            <div style="font-size:10px; color:#ffeb3b;">📦 50K+ MMS LEAK PACK</div>
-        </div>
+        {% endfor %}
     </div>
 
     <!-- PROFILE PAGE -->
@@ -221,7 +234,7 @@ HTML = """
                 <div style="font-size:11px; color:#777;">WALLET BALANCE</div>
                 <div style="font-size:18px; font-weight:900; color:#ffeb3b; margin-top:3px;" id="profile-wallet">₹{{ total_wallet }}</div>
             </div>
-            <button class="nav-btn" onclick="showPopup(0)" style="background:#28a745; border:none;">ADD FUNDS</button>
+            <button class="nav-btn" onclick="openAddFunds()" style="background:#28a745; border:none;">ADD FUNDS</button>
         </div>
     </div>
 
@@ -234,18 +247,19 @@ HTML = """
 
     <div id="p" class="popup">
         <div class="box" id="content-box">
-            <div class="back-btn" onclick="closePopup()">BACK TO HOME</div>
-            <h3>PAY & ADD DETAILS ✍️</h3>
-            <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
-            <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
-            <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
-            <button class="btn-buy" onclick="verify()">SUBMIT DETAILS</button>
+            <div class="back-btn" onclick="closePopup()">CLOSE</div>
+            <div id="popup-inner">
+                <h3>PAY & ADD FUNDS ✍️</h3>
+                <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
+                <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
+                <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+                <button class="btn-buy" onclick="verifyAddFunds()">SUBMIT PAYMENT</button>
+            </div>
         </div>
     </div>
 
     <script>
         let timerInterval;
-        let currentPrice = 0;
         
         function switchPage(pageId, element) {
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
@@ -264,31 +278,66 @@ HTML = """
         function closeMenu() { document.getElementById('m').style.display = 'none'; }
         window.onclick = function() { closeMenu(); }
 
-        function showPopup(price) { 
-            currentPrice = price;
-            document.getElementById('p').style.display = 'flex'; 
-            startTimer(240); 
+        function openAddFunds() {
+            document.getElementById('popup-inner').innerHTML = `
+                <h3>PAY & ADD FUNDS ✍️</h3>
+                <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
+                <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
+                <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
+                <input id="add-amount" type="number" placeholder="ENTER AMOUNT YOU PAID (E.G. 200)" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center;"><br>
+                <button class="btn-buy" onclick="verifyAddFunds()">SUBMIT PAYMENT</button>
+            `;
+            document.getElementById('p').style.display = 'flex';
+            startTimer(240);
         }
+
+        function unlockItem(itemId, itemPrice) {
+            fetch('/unlock', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'item_id=' + itemId
+            }).then(r => r.json()).then(data => {
+                if(data.success) {
+                    document.getElementById('popup-inner').innerHTML = data.html;
+                    document.getElementById('p').style.display = 'flex';
+                    document.getElementById('wallet-display').textContent = "💰 WALLET: ₹" + data.new_wallet;
+                    let profileWallet = document.getElementById('profile-wallet');
+                    if(profileWallet) profileWallet.textContent = "₹" + data.new_wallet;
+                } else {
+                    if(data.need_funds) {
+                        alert(data.message);
+                        openAddFunds();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+
         function closePopup() { document.getElementById('p').style.display = 'none'; clearInterval(timerInterval); }
+        
         function startTimer(duration) {
             clearInterval(timerInterval);
             let timer = duration, m, s;
             timerInterval = setInterval(function () {
                 m = parseInt(timer / 60, 10); s = parseInt(timer % 60, 10);
-                document.getElementById('timer').textContent = "0" + m + ":" + (s < 10 ? "0" + s : s);
+                let timerEl = document.getElementById('timer');
+                if(timerEl) timerEl.textContent = "0" + m + ":" + (s < 10 ? "0" + s : s);
                 if (--timer < 0) { closePopup(); }
             }, 1000);
         }
-        function verify() {
+
+        function verifyAddFunds() {
             let tid = document.getElementById('tid').value;
-            fetch('/verify', {
+            let amount = document.getElementById('add-amount').value;
+            fetch('/verify_funds', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'tid=' + tid + '&amount=' + currentPrice
+                body: 'tid=' + tid + '&amount=' + amount
             }).then(r => r.json()).then(data => {
                 if(data.success) {
                     clearInterval(timerInterval);
-                    document.getElementById('content-box').innerHTML = data.html;
+                    document.getElementById('popup-inner').innerHTML = `<h3 style='color:#32cd32;'>✅ FUNDS ADDED SUCCESSFULLY!</h3><p style='color:white; font-weight:bold;'>New Balance: ₹` + data.new_wallet + `</p><button class="btn-buy" onclick="closePopup()">CONTINUE SHOPPING</button>`;
                     document.getElementById('wallet-display').textContent = "💰 WALLET: ₹" + data.new_wallet;
                     let profileWallet = document.getElementById('profile-wallet');
                     if(profileWallet) profileWallet.textContent = "₹" + data.new_wallet;
@@ -316,47 +365,4 @@ def home():
     c.execute("SELECT COUNT(*), SUM(CASE WHEN status='COMPLETED' THEN 1 ELSE 0 END) FROM transactions")
     order_data = c.fetchone()
     total_orders = order_data[0] if order_data[0] else 0
-    completed_orders = order_data[1] if order_data[1] else 0
-    conn.close()
-
-    return render_template_string(HTML, content=content, total_wallet=total_wallet, user_id=session['user_id'], total_orders=total_orders, completed_orders=completed_orders)
-
-@app.route('/verify', methods=['POST'])
-def verify():
-    tid = request.form.get('tid', '').strip()
-    try:
-        amount = int(request.form.get('amount', '0'))
-    except ValueError:
-        amount = 0
-
-    if not re.match(r'^\d{12}$', tid):
-        return {"success": False, "message": "❌ INVALID TID! MUST BE 12 DIGITS."}
-    
-    conn = sqlite3.connect('payments.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM transactions WHERE tid=?", (tid,))
-    if c.fetchone():
-        conn.close()
-        return {"success": False, "message": "❌ TID ALREADY USED!"}
-    
-    c.execute("INSERT INTO transactions (tid, amount, status) VALUES (?, ?, ?)", (tid, amount, 'COMPLETED'))
-    conn.commit()
-    conn.close()
-
-    conn = sqlite3.connect('payments.db')
-    c = conn.cursor()
-    c.execute("SELECT SUM(amount) FROM transactions")
-    res = c.fetchone()[0]
-    total_wallet = res if res else 0
-    conn.close()
-
-    success_html = """
-    <h3 style='color:#32cd32; font-size:16px; font-weight:900;'>✅ PAYMENT VERIFIED! ACCESS MIL GAYA!</h3>
-    <p style='font-size:14px; font-weight:900; color:white;'>💋 WATCH VIDEO 💋</p>
-    <a href='https://t.me/+DVwN8sdnvDQ1YWE9' style='color:#00ffff; text-decoration:none; font-weight:900; font-size:14px;'>⚡️ JOIN CHANNEL</a>
-    """
-    return {"success": True, "html": success_html, "new_wallet": total_wallet}
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    co
