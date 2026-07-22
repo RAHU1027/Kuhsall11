@@ -7,11 +7,11 @@ app.secret_key = 'super_secret_store_key_change_this'
 def init_db():
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
-    # Transactions table mein hum 'type' ya status manage kar sakte hain
     c.execute('''CREATE TABLE IF NOT EXISTS transactions 
                  (tid TEXT PRIMARY KEY, amount INTEGER, status TEXT DEFAULT 'COMPLETED')''')
     conn.commit()
     conn.close()
+
 init_db()
 
 content = [
@@ -365,4 +365,6 @@ def home():
     c.execute("SELECT COUNT(*), SUM(CASE WHEN status='COMPLETED' THEN 1 ELSE 0 END) FROM transactions")
     order_data = c.fetchone()
     total_orders = order_data[0] if order_data[0] else 0
-    co
+    completed_orders = order_data[1] if order_data[1] else 0
+    conn.close()
+
