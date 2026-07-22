@@ -1,17 +1,14 @@
-from flask import Flask, render_template_string, request, redirect, session
+from flask import Flask, render_template_string, request, session
 import sqlite3, re, uuid, os
 
 app = Flask(__name__)
-app.secret_key = 'super_secret_admin_key_change_this'
+app.secret_key = 'super_secret_store_key_change_this'
 
 def init_db():
     conn = sqlite3.connect('payments.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS transactions 
                  (tid TEXT PRIMARY KEY, amount INTEGER, status TEXT DEFAULT 'COMPLETED')''')
-    c.execute('''CREATE TABLE IF NOT EXISTS settings 
-                 (key TEXT PRIMARY KEY, value TEXT)''')
-    c.execute("INSERT OR IGNORE INTO settings VALUES ('qr_code', '/static/qr.jpg')")
     conn.commit()
     conn.close()
 init_db()
@@ -240,7 +237,7 @@ HTML = """
             <div class="back-btn" onclick="closePopup()">BACK TO HOME</div>
             <h3>PAY & ADD DETAILS ✍️</h3>
             <div id="timer" style="color:#ffeb3b; font-weight:900; font-size:15px; margin-bottom:10px;">04:00</div>
-            <img src="{{ qr_code }}" style="width:100%; background:white; padding:5px; border-radius:5px;">
+            <img src="/static/qr.jpg" style="width:100%; background:white; padding:5px; border-radius:5px;">
             <input id="tid" placeholder="12 DIGIT TRANSACTION ID" style="width:90%; padding:10px; margin:5px; background:#1a1a1a; border:1px solid rgba(255,235,59,0.3); color:#fff; border-radius:5px; font-weight:bold; text-align:center; text-transform:uppercase;"><br>
             <button class="btn-buy" onclick="verify()">SUBMIT DETAILS</button>
         </div>
@@ -320,13 +317,9 @@ def home():
     order_data = c.fetchone()
     total_orders = order_data[0] if order_data[0] else 0
     completed_orders = order_data[1] if order_data[1] else 0
-
-    c.execute("SELECT value FROM settings WHERE key='qr_code'")
-    qr_row = c.fetchone()
-    qr_code = qr_row[0] if qr_row else '/static/qr.jpg'
     conn.close()
 
-    return render_template_string(HTML, content=content, total_wallet=total_wallet, qr_code=qr_code, user_id=session['user_id'], total_orders=total_orders, completed_orders=completed_orders)
+    return render_template_string(HTML, content=content, total_wallet=total_wallet, user_id=session['user_id'], total_orders=total_orders, completed_orders=completed_orders)
 
 @app.route('/verify', methods=['POST'])
 def verify():
@@ -348,7 +341,10 @@ def verify():
     
     c.execute("INSERT INTO transactions (tid, amount, status) VALUES (?, ?, ?)", (tid, amount, 'COMPLETED'))
     conn.commit()
+    conn.close()
 
+    conn = sqlite3.connect('payments.db')
+    c = conn.cursor()
     c.execute("SELECT SUM(amount) FROM transactions")
     res = c.fetchone()[0]
     total_wallet = res if res else 0
@@ -361,28 +357,6 @@ def verify():
     """
     return {"success": True, "html": success_html, "new_wallet": total_wallet}
 
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    if request.method == 'POST':
-        new_qr = request.form.get('qr_code')
-        if new_qr:
-            conn = sqlite3.connect('payments.db')
-            c = conn.cursor()
-            c.execute("UPDATE settings SET value=? WHERE key='qr_code'", (new_qr,))
-            conn.commit()
-            conn.close()
-        return redirect('/admin')
-    
-    conn = sqlite3.connect('payments.db')
-    c = conn.cursor()
-    c.execute("SELECT value FROM settings WHERE key='qr_code'")
-    qr_row = c.fetchone()
-    current_qr = qr_row[0] if qr_row else '/static/qr.jpg'
-    
-    c.execute("SELECT tid, amount, status FROM transactions")
-    txs = c.fetchall()
-    conn.close()
-
-    rows_html = ""
-    for t in txs:
-        rows_html += "<tr><t
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
