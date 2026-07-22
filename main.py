@@ -1,5 +1,5 @@
 from flask import Flask, render_template_string, request, redirect, session
-import sqlite3, re, uuid
+import sqlite3, re, uuid, os
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_admin_key_change_this'
@@ -385,4 +385,4 @@ def admin():
 
     rows_html = ""
     for t in txs:
-        rows_html += "<tr><td>" 
+        rows_html += "<tr><t
